@@ -524,12 +524,12 @@ body.cart-open #wspBtn {
 
   /* Hero — logo completo sin cortarse */
   .hero-bg {
-    background-size: cover;
-    background-position: center 20%;
+    background-size: 250% auto;
+    background-position: center 15%;
     background-repeat: no-repeat;
   }
   .hero {
-    height: 55vw;
+    height: 70vw;
     min-height: 280px;
     max-height: 380px;
   }
