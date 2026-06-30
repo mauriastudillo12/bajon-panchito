@@ -521,6 +521,51 @@ body.cart-open #wspBtn {
   .mitem-desc { display: none; }
   .menu-body { padding: 1.5rem 1rem 3rem; }
   .cart-nav-label { display: none; }
+
+  /* Hero — logo completo sin cortarse */
+  .hero-bg {
+    background-position: center center;
+    background-size: contain;
+    background-color: #000;
+  }
+
+  /* Stats flotante — 3 columnas, texto reducido */
+  .stats-float {
+    margin: -30px 12px 0;
+    border-radius: 8px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .stat-item { padding: 0.8rem 0.4rem; }
+  .stat-item:last-child { display: none; }
+  .stat-item:nth-child(3) { border-right: none; }
+  .stat-num { font-size: 15px; }
+  .stat-label { font-size: 8px; letter-spacing: 0.5px; }
+
+  /* Botones flotantes — alejados del borde */
+  #wspBtn {
+    bottom: 80px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+  }
+  #igBtn {
+    bottom: 140px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+  }
+
+  /* Tabs menú — scroll horizontal sin cortes */
+  .menu-tabs {
+    padding: 0 12px;
+    gap: 0;
+  }
+  .mtab {
+    font-size: 10px;
+    padding: 0.9rem 1rem;
+    letter-spacing: 0.5px;
+  }
 }
 
 /* ── CART ITEMS ── */
