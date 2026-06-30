@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://*.supabase.co wss://*.supabase.co https://fonts.googleapis.com https://fonts.gstatic.com https://cdn.jsdelivr.net https://www.instagram.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; connect-src 'self' https://*.supabase.co wss://*.supabase.co; img-src 'self' data: blob:; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net;">
+  <title>El Bajón de Panchito</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Estilos del carrito drawer (inline para rapidez) */
+    .qbtn {
+      width:24px;height:24px;border:1px solid #E8E5E0;background:#fff;
+      border-radius:50%;cursor:pointer;font-size:14px;color:#000;
+      display:flex;align-items:center;justify-content:center;
+      transition:all .15s;font-family:'Inter',sans-serif;line-height:1;
+    }
+    .qbtn:hover { background:#000;color:#fff;border-color:#000; }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVEGACIÓN ── -->
+<nav>
+  <div class="nav-logo">El Bajón <span>de Panchito</span></div>
+  <div class="nav-links">
+    <a href="#">Inicio</a>
+    <a href="#menu">Carta</a>
+    <a href="#nosotros">Nosotros</a>
+    <a href="#contacto">Contacto</a>
+  </div>
+  <div class="nav-actions">
+    <button id="cartNavBtn" onclick="openCart()" aria-label="Carrito">
+      <div id="cartIconBox" class="cart-icon-box">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+        <span id="cc">0</span>
+      </div>
+      <span class="cart-nav-label">Mi pedido</span>
+    </button>
+    <button class="nav-cta" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">Pedir ahora</button>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-gradient"></div>
+  <div class="hero-content">
+    <button class="hero-btn" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">
+      Ver carta &nbsp; →
+    </button>
+  </div>
+</div>
+
+<!-- ── STATS FLOTANTE ── -->
+<div class="stats-float">
+  <div class="stat-item">
+    <span class="stat-num">~25 <em>min</em></span>
+    <div class="stat-label">Tiempo de retiro</div>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num"><em>Mar–Dom</em></span>
+    <div class="stat-label">Días de atención</div>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">Abierto</span>
+    <div class="stat-label">09:30 a 23:30</div>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num"><em>Direccion</em></span>
+    <div class="stat-label">General Gambino 4190</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     MENÚ
+     ══════════════════════════════════ -->
+<div class="menu-v2" id="menu">
+
+  <!-- TABS PEGAJOSOS -->
+  <div class="menu-tabs-wrap">
+    <div class="menu-tabs" id="menuTabs">
+      <button class="mtab on"  onclick="scrollTocat('empanadas',this)">Empanadas</button>
+      <button class="mtab"     onclick="scrollTocat('completos',this)">Completos</button>
+      <button class="mtab"     onclick="scrollTocat('churrascos',this)">Churrascos</button>
+      <button class="mtab"     onclick="scrollTocat('lomitos',this)">Lomitos</button>
+      <button class="mtab"     onclick="scrollTocat('hamburguesas',this)">Hamburguesas</button>
+      <button class="mtab"     onclick="scrollTocat('fajitas',this)">Fajitas</button>
+      <button class="mtab"     onclick="scrollTocat('papas',this)">Papas</button>
+      <button class="mtab"     onclick="scrollTocat('pizzas',this)">Pizzas</button>
+    </div>
+  </div>
+
+  <!-- ENCABEZADO -->
+  <div style="max-width:1080px;margin:0 auto;padding:3rem 2rem 0;text-align:center">
+    <div class="section-eyebrow">Nuestra carta</div>
+    <h2 class="section-title">La carta completa</h2>
+    <p class="section-sub">Todo preparado al momento con los mejores ingredientes.</p>
+  </div>
+
+  <div class="menu-body">
+
+    <!-- ── EMPANADAS ── -->
+    <div class="cat-block" id="cat-empanadas">
+      <div class="cat-title">Empanadas</div>
+      <div class="cat-line"><div class="cat-line-bar"></div><span class="cat-line-sub">Horneadas y fritas al momento</span></div>
+      <div class="items-list">
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/empanada.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Pino Molida</div>
+            <div class="mitem-desc">Pino clásico con carne molida, cebolla, huevo y aceitunas</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-badge mb-g">Popular</span>
+            <span class="mitem-price">$2.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Pino Molida',2000,'🫓','Empanadas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/empanada.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Pino Carne Picada</div>
+            <div class="mitem-desc">Pino con carne picada a cuchillo, cebolla y huevo</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-price">$2.500 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Pino Carne Picada',2500,'🫓','Empanadas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/empanada.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Camarón Queso</div>
+            <div class="mitem-desc">Camarones al ajillo con queso derretido</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-badge mb-g">Popular</span>
+            <span class="mitem-price">$2.500 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Camarón Queso',2500,'🫓','Empanadas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/empanada.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Queso Solo</div>
+            <div class="mitem-desc">Queso mantecoso fundido</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-price">$2.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Queso Solo',2000,'🫓','Empanadas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/empanada.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Champiñón Queso</div>
+            <div class="mitem-desc">Champiñones salteados con queso</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-price">$3.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Champiñón Queso',3000,'🫓','Empanadas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/empanada.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Napolitana</div>
+            <div class="mitem-desc">Tomate, mozzarella y orégano</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-price">$3.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Napolitana',3000,'🫓','Empanadas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/empanada.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Marisco</div>
+            <div class="mitem-desc">Mix de mariscos frescos</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-price">$3.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Marisco',3000,'🫓','Empanadas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/empanada.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Pollo Queso</div>
+            <div class="mitem-desc">Pollo desmenuzado con queso</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-price">$3.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Pollo Queso',3000,'🫓','Empanadas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/empanada.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Churrasco Queso</div>
+            <div class="mitem-desc">Tiras de churrasco con queso derretido</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-price">$3.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Churrasco Queso',3000,'🫓','Empanadas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/empanada.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Choclo Queso</div>
+            <div class="mitem-desc">Choclo dulce con queso mantecoso</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-price">$2.500 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Choclo Queso',2500,'🫓','Empanadas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/empanada.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Aceituna Queso</div>
+            <div class="mitem-desc">Aceitunas y queso fundido</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-price">$2.500 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Aceituna Queso',2500,'🫓','Empanadas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/empanada.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Mechada Queso</div>
+            <div class="mitem-desc">Mechada jugosa con queso</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-price">$3.500 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Mechada Queso',3500,'🫓','Empanadas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/empanada.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Jamón Queso</div>
+            <div class="mitem-desc">Jamón ahumado con queso</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-price">$3.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Jamón Queso',3000,'🫓','Empanadas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/empanada.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Mallorquina Frita</div>
+            <div class="mitem-desc">Masa frita rellena, crujiente y dorada</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-badge mb-w">Frita</span>
+            <span class="mitem-price">$3.500 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Mallorquina Frita',3500,'🫓','Empanadas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/empanada.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Mallorquina Horno</div>
+            <div class="mitem-desc">Masa al horno, versión tradicional</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-badge mb-w">Horno</span>
+            <span class="mitem-price">$2.500 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Mallorquina Horno',2500,'🫓','Empanadas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/empanada.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Queso Mil Hoja</div>
+            <div class="mitem-desc">Capas de hojaldre crujiente con queso</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-badge mb-w">Especial</span>
+            <span class="mitem-price">$2.500 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Queso Mil Hoja',2500,'🫓','Empanadas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/empanada.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Ingrediente Extra</div>
+            <div class="mitem-desc">Agrega un ingrediente adicional a tu empanada</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-badge mb-w">Adicional</span>
+            <span class="mitem-price">$700 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Ingrediente Extra',700,'🫓','Empanadas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/empanada.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Pastel de Choclo</div>
+            <div class="mitem-desc">El favorito de la casa, preparado al momento</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-badge" style="background:#C9A84C;color:#000">Destacado</span>
+            <span class="mitem-price">$4.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Pastel de Choclo',4000,'🌽','Empanadas')">+</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── COMPLETOS ── -->
+    <div class="cat-block" id="cat-completos">
+      <div class="cat-title">Completos</div>
+      <div class="cat-line"><div class="cat-line-bar"></div><span class="cat-line-sub">Hot dogs estilo chileno</span></div>
+      <div class="items-list">
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/completo.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Completo</div>
+            <div class="mitem-desc">Hot dog clásico con todos los ingredientes</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-badge mb-g">Popular</span>
+            <span class="mitem-price">$3.500 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Completo',3500,'🌭','Completos')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/completo.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Completo Italiano</div>
+            <div class="mitem-desc">Con palta, tomate y mayonesa</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-price">$4.500 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Completo Italiano',4500,'🌭','Completos')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/completo.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Completo Dinámico</div>
+            <div class="mitem-desc">Con ingredientes extras, más sabor en cada bocado</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-badge mb-w">Especial</span>
+            <span class="mitem-price">$5.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Completo Dinámico',5000,'🌭','Completos')">+</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── CHURRASCOS ── -->
+    <div class="cat-block" id="cat-churrascos">
+      <div class="cat-title">Churrascos</div>
+      <div class="cat-line"><div class="cat-line-bar"></div><span class="cat-line-sub">Carne de vacuno fina al sartén</span></div>
+      <div class="items-list">
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/churrasco.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Churrasco Italiano</div>
+            <div class="mitem-desc">Carne fina con palta, tomate y mayo</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-badge mb-g">Popular</span>
+            <span class="mitem-price">$5.500 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Churrasco Italiano',5500,'🥩','Churrascos')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/churrasco.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Churrasco Chacarero</div>
+            <div class="mitem-desc">Con porotos verdes, tomate y ají verde</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-price">$5.500 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Churrasco Chacarero',5500,'🥩','Churrascos')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/churrasco.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Barros Luco</div>
+            <div class="mitem-desc">Carne de vacuno y queso derretido</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-badge mb-w">Clásico</span>
+            <span class="mitem-price">$5.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Barros Luco',5000,'🥩','Churrascos')">+</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── LOMITOS ── -->
+    <div class="cat-block" id="cat-lomitos">
+      <div class="cat-title">Lomitos</div>
+      <div class="cat-line"><div class="cat-line-bar"></div><span class="cat-line-sub">Lomito de cerdo jugoso</span></div>
+      <div class="items-list">
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/churrasco.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Lomito Italiano</div>
+            <div class="mitem-desc">Cerdo con palta, tomate y mayonesa</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-badge mb-g">Popular</span>
+            <span class="mitem-price">$6.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Lomito Italiano',6000,'🥪','Lomitos')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/churrasco.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Lomito Chacarero</div>
+            <div class="mitem-desc">Con porotos verdes, tomate y ají verde</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-price">$6.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Lomito Chacarero',6000,'🥪','Lomitos')">+</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── HAMBURGUESAS ── -->
+    <div class="cat-block" id="cat-hamburguesas">
+      <div class="cat-title">Hamburguesas</div>
+      <div class="cat-line"><div class="cat-line-bar"></div><span class="cat-line-sub">Jugosas y bien condimentadas</span></div>
+      <div class="items-list">
+
+        <div class="mitem">
+          <div class="mitem-emoji">🍔</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Hamburguesa Italiana Carne</div>
+            <div class="mitem-desc">Vacuno con palta, tomate y mayo</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-badge mb-g">Popular</span>
+            <span class="mitem-price">$5.500 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Hamburguesa Italiana Carne',5500,'🍔','Hamburguesas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji">🍔</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Hamburguesa Italiana Pollo</div>
+            <div class="mitem-desc">Pollo con palta, tomate y mayo</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-price">$5.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Hamburguesa Italiana Pollo',5000,'🍔','Hamburguesas')">+</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── FAJITAS ── -->
+    <div class="cat-block" id="cat-fajitas">
+      <div class="cat-title">Fajitas</div>
+      <div class="cat-line"><div class="cat-line-bar"></div><span class="cat-line-sub">Salteadas al momento en tortilla caliente</span></div>
+      <div class="items-list">
+
+        <div class="mitem">
+          <div class="mitem-emoji">🌮</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Fajita de Carne</div>
+            <div class="mitem-desc">Tiras de vacuno con verduras y especias</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-price">$6.500 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Fajita de Carne',6500,'🌮','Fajitas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji">🌮</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Fajita de Pollo</div>
+            <div class="mitem-desc">Tiras de pollo con pimentón y cebolla</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-price">$6.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Fajita de Pollo',6000,'🌮','Fajitas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji">🌮</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Fajita Mixta</div>
+            <div class="mitem-desc">Carne de vacuno y pollo juntos</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-badge mb-w">Mixta</span>
+            <span class="mitem-price">$7.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Fajita Mixta',7000,'🌮','Fajitas')">+</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── PAPAS ── -->
+    <div class="cat-block" id="cat-papas">
+      <div class="cat-title">Papas</div>
+      <div class="cat-line"><div class="cat-line-bar"></div><span class="cat-line-sub">El acompañamiento perfecto</span></div>
+      <div class="items-list">
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/papas.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Papas Fritas</div>
+            <div class="mitem-desc">Doradas y crujientes al momento</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-badge mb-g">Popular</span>
+            <span class="mitem-price">$2.500 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Papas Fritas',2500,'🍟','Papas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/papas.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Papas Supime</div>
+            <div class="mitem-desc">Con toppings especiales, versión premium</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-badge mb-w">Especial</span>
+            <span class="mitem-price">$3.500 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Papas Supime',3500,'🍟','Papas')">+</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── PIZZAS ── -->
+    <div class="cat-block" id="cat-pizzas">
+      <div class="cat-title">Pizzas Individuales</div>
+      <div class="cat-line"><div class="cat-line-bar"></div><span class="cat-line-sub">Masa artesanal horneada al momento</span></div>
+      <div class="items-list">
+
+        <div class="mitem">
+          <div class="mitem-emoji">🍕</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Pizza Napolitana</div>
+            <div class="mitem-desc">Salsa de tomate, queso, aceitunas y orégano</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-badge mb-g">Popular</span>
+            <span class="mitem-price">$5.500 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Pizza Napolitana',5500,'🍕','Pizzas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji">🍕</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Pizza Peperoni</div>
+            <div class="mitem-desc">Pepperoni, mozzarella y salsa de tomate</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-price">$6.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Pizza Peperoni',6000,'🍕','Pizzas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji">🍕</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Pizza Vegetariana</div>
+            <div class="mitem-desc">Verduras frescas, queso y salsa casera</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-badge mb-w">Veggie</span>
+            <span class="mitem-price">$5.500 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Pizza Vegetariana',5500,'🍕','Pizzas')">+</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /menu-body -->
+</div><!-- /menu-v2 -->
+
+<!-- ── NOSOTROS ── -->
+<div id="nosotros" class="about-strip">
+  <div class="about-grid">
+    <div class="about-item">
+      <div class="about-icon"><i class="ti ti-flame"></i></div>
+      <div class="about-title">Todo al momento</div>
+      <div class="about-text">Cada pedido se prepara fresco al instante.</div>
+    </div>
+    <div class="about-divider"></div>
+    <div class="about-item">
+      <div class="about-icon"><i class="ti ti-map-pin"></i></div>
+      <div class="about-title">Retiro en tienda</div>
+      <div class="about-text">
+        Tu pedido listo en ~20 minutos. Contáctanos al <strong style="color:#C9A84C">+56 9 6864 7659</strong>
+        <br><br>
+        📍 General Gambino 4190, Conchalí
+        <br>
+        <a href="https://www.google.com/maps/search/?api=1&query=General+Gambino+4190+Conchal%C3%AD+Santiago"
+           target="_blank" rel="noopener noreferrer"
+           style="display:inline-flex;align-items:center;gap:6px;margin-top:8px;
+           background:#C9A84C;color:#000;padding:8px 16px;border-radius:6px;
+           font-size:11px;font-weight:600;text-decoration:none;letter-spacing:0.5px;
+           text-transform:uppercase;transition:background 0.2s;">
+          <i class="ti ti-map-pin"></i> Ver ubicación
+        </a>
+      </div>
+    </div>
+    <div class="about-divider"></div>
+    <div class="about-item">
+      <div class="about-icon"><i class="ti ti-clock"></i></div>
+      <div class="about-title">Horario de atención</div>
+      <div class="about-text">Martes a Domingo<br><strong style="color:#C9A84C">9:30 – 23:30 hrs</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── PROMO ── -->
+<div class="promo-section">
+  <div class="promo-card">
+    <div>
+      <div class="promo-badge">Favorito de la casa</div>
+      <div class="promo-title">Pastel de Choclo — el favorito de la casa</div>
+      <p class="promo-sub">Preparado al momento · Mar–Dom 9:30–17:30</p>
+    </div>
+    <button class="promo-btn" onclick="add('Pastel de Choclo',4000,'🌽','Empanadas')">Agregar al pedido</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     CART DRAWER
+     ══════════════════════════════════ -->
+<div id="overlay" onclick="closeCart()"></div>
+
+<div id="cartDrawer">
+
+  <!-- ══ VISTA 1: CARRITO ══ -->
+  <div id="cartMainView" style="display:flex;flex-direction:column;height:100%;">
+
+    <!-- Header -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:1.4rem 1.6rem;border-bottom:1px solid #F0EDE8;flex-shrink:0;">
+      <div style="display:flex;align-items:center;gap:10px">
+        <i class="ti ti-shopping-bag" style="font-size:18px;color:#C9A84C"></i>
+        <span style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#000">Tu pedido</span>
+        <span id="drawerCount" style="background:#000;color:#fff;font-size:9px;font-weight:700;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;">0</span>
+      </div>
+      <button onclick="closeCart()" style="background:transparent;border:1px solid #E8E5E0;width:32px;height:32px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;color:#999;">
+        <i class="ti ti-x"></i>
+      </button>
+    </div>
+
+    <!-- Retiro pill -->
+    <div style="padding:.9rem 1.6rem;background:#F8F6F2;border-bottom:1px solid #F0EDE8;flex-shrink:0;">
+      <div style="display:flex;align-items:center;gap:8px;">
+        <i class="ti ti-map-pin" style="font-size:13px;color:#C9A84C"></i>
+        <span style="font-size:11px;color:#555;font-weight:300;">Retiro en tienda · Mar–Dom 9:30–17:30</span>
+        <span style="margin-left:auto;font-size:9.5px;font-weight:700;color:#22a35a;letter-spacing:.5px;text-transform:uppercase;">Gratis</span>
+      </div>
+    </div>
+
+    <!-- Items -->
+    <div id="drawerItems" style="flex:1;overflow-y:auto;padding:0 1.6rem;display:none;"></div>
+
+    <!-- Footer totals -->
+    <div id="drawerFooter" style="display:none;flex-shrink:0;border-top:1px solid #F0EDE8;padding:1.4rem 1.6rem;background:#fff;">
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:#999;margin-bottom:4px;">
+        <span>Subtotal</span><span id="dSub"></span>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:12px;color:#999;margin-bottom:14px;">
+        <span>Retiro</span><span style="color:#22a35a;font-weight:600;">Gratis</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:1.2rem;">
+        <span style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;">Total</span>
+        <span id="dTotal" style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#C9A84C;"></span>
+      </div>
+      <button onclick="checkout()" style="width:100%;background:#000;color:#fff;border:none;padding:15px;font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;cursor:pointer;font-family:'Inter',sans-serif;border-radius:2px;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .2s;"
+        onmouseover="this.style.background='#C9A84C';this.style.color='#000'"
+        onmouseout="this.style.background='#000';this.style.color='#fff'">
+        Realizar pedido
+      </button>
+      <button onclick="clearCart()" style="width:100%;background:transparent;border:none;color:#bbb;font-size:9.5px;letter-spacing:.8px;text-transform:uppercase;cursor:pointer;font-family:'Inter',sans-serif;margin-top:10px;padding:4px;">
+        Vaciar carrito
+      </button>
+    </div>
+
+    <!-- Empty state -->
+    <div id="drawerEmpty" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;text-align:center;">
+      <i class="ti ti-basket" style="font-size:44px;color:#E0DDDA;margin-bottom:1rem;"></i>
+      <p style="font-size:13px;color:#bbb;font-weight:300;line-height:1.7;">Tu carrito está vacío.<br>Agrega algo desde la carta.</p>
+      <button onclick="closeCart()" style="margin-top:1.4rem;background:transparent;border:1px solid #E8E5E0;color:#555;font-size:9.5px;letter-spacing:1px;text-transform:uppercase;padding:8px 18px;cursor:pointer;font-family:'Inter',sans-serif;border-radius:2px;">
+        Ver carta
+      </button>
+    </div>
+
+  </div><!-- /#cartMainView -->
+
+  <!-- ══ VISTA 2: CHECKOUT ══ -->
+  <div id="checkoutStep" style="display:none;flex-direction:column;height:100%;">
+
+    <!-- Header -->
+    <div style="display:flex;align-items:center;gap:12px;padding:1.4rem 1.6rem;border-bottom:1px solid #F0EDE8;flex-shrink:0;">
+      <button onclick="backToCart()" style="background:transparent;border:none;cursor:pointer;font-size:13px;color:#555;display:flex;align-items:center;gap:5px;font-family:'Inter',sans-serif;font-weight:500;padding:0;white-space:nowrap;">
+        <i class="ti ti-arrow-left" style="font-size:15px;"></i> Volver
+      </button>
+      <span style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#000;flex:1;text-align:center;padding-right:52px;">Confirmar pedido</span>
+    </div>
+
+    <!-- Scroll area -->
+    <div style="flex:1;overflow-y:auto;padding:1.4rem 1.6rem;">
+
+      <!-- Resumen de items -->
+      <div id="checkoutItems" style="margin-bottom:1.4rem;"></div>
+
+      <!-- Formulario -->
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <input id="clientName" type="text" placeholder="Tu nombre *" class="checkout-input"
+          maxlength="60" autocomplete="name">
+        <input id="clientPhone" type="tel" placeholder="Tu teléfono (opcional)"
+          style="width:100%;padding:12px;border:1px solid #E8E5E0;border-radius:6px;
+          font-family:'Inter',sans-serif;font-size:13px;outline:none;
+          transition:border-color .2s;"
+          onfocus="this.style.borderColor='#C9A84C'"
+          onblur="this.style.borderColor='#E8E5E0'"
+          maxlength="20" autocomplete="tel" inputmode="numeric">
+        <textarea id="clientComment" placeholder="Comentario u observación (opcional)" class="checkout-input checkout-textarea"
+          maxlength="300"
+          oninput="document.getElementById('commentCount').textContent=this.value.length+'/300'"></textarea>
+        <div style="text-align:right;font-size:10px;color:#bbb;font-family:'Inter',sans-serif;margin-top:-4px;">
+          <span id="commentCount">0/300</span>
+        </div>
+        <div id="formError" style="display:none;background:#FFF0F0;border:1px solid #FFD0D0;border-radius:6px;padding:10px 14px;font-size:12px;color:#c00;font-family:'Inter',sans-serif;"></div>
+      </div>
+
+    </div>
+
+    <!-- Botón enviar -->
+    <div style="flex-shrink:0;border-top:1px solid #F0EDE8;padding:1.4rem 1.6rem;background:#fff;">
+      <button id="confirmBtn" onclick="confirmOrder()" class="checkout-submit-btn"
+        onmouseover="if(!this.disabled){this.style.background='#C9A84C';this.style.color='#000'}"
+        onmouseout="if(!this.disabled){this.style.background='#000';this.style.color='#fff'}">
+        <span id="confirmBtnText">Confirmar pedido</span>
+      </button>
+    </div>
+
+  </div><!-- /#checkoutStep -->
+
+
+</div>
+
+<!-- ── FOOTER ── -->
+<footer id="contacto">
+  <div class="footer-logo">El Bajón <span>de Panchito</span></div>
+  <div class="footer-info">
+    <i class="ti ti-clock" style="font-size:12px;vertical-align:-1px;color:#C9A84C"></i>
+    &nbsp; Mar–Dom 9:30–17:30 &nbsp;·&nbsp;
+    <i class="ti ti-brand-whatsapp" style="font-size:12px;vertical-align:-1px;color:#C9A84C"></i>
+    &nbsp; +56 9 6864 7659 &nbsp;·&nbsp;
+    <i class="ti ti-map-pin" style="font-size:12px;vertical-align:-1px;color:#C9A84C"></i>
+    &nbsp; General Gambino 4190, Conchalí
+  </div>
+  <div class="footer-nav">
+    <a href="#">Términos</a>
+    <a href="https://wa.me/56968647659" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+    <a href="#">Contacto</a>
+  </div>
+</footer>
+
+<!-- ── INSTAGRAM FLOTANTE ── -->
+<a href="https://www.instagram.com/bajonpanchito" target="_blank" rel="noopener noreferrer" id="igBtn" aria-label="Visítanos en Instagram">
+  <span class="ig-tooltip">¡Visítanos!</span>
+  <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="white">
+    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+  </svg>
+</a>
+
+<!-- ── WHATSAPP FLOTANTE ── -->
+<a href="https://wa.me/56968647659" target="_blank" rel="noopener noreferrer" id="wspBtn" aria-label="Contactar por WhatsApp">
+  <span class="wsp-tooltip">¡Háblanos!</span>
+  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script src="js/app.js"></script>
+</body>
+</html>
