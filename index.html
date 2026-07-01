@@ -34,18 +34,11 @@
     <a href="#contacto">Contacto</a>
   </div>
   <div class="nav-actions">
-    <button id="cartNavBtn" onclick="openCart()" aria-label="Carrito">
-      <div id="cartIconBox" class="cart-icon-box">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
-          <line x1="3" y1="6" x2="21" y2="6"/>
-          <path d="M16 10a4 4 0 01-8 0"/>
-        </svg>
-        <span id="cc">0</span>
-      </div>
+    <button id="cartNavBtn" onclick="openCart()" aria-label="Mi pedido">
+      <i class="ti ti-shopping-bag" style="font-size:18px;color:#C9A84C"></i>
       <span class="cart-nav-label">Mi pedido</span>
+      <span id="cc">0</span>
     </button>
-    <button class="nav-cta" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">Pedir ahora</button>
   </div>
 </nav>
 

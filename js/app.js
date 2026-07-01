@@ -50,12 +50,12 @@ function add(name, price, icon, categoria) {
 }
 
 function animateCartIcon() {
-  const box = document.getElementById('cartIconBox');
-  if (!box) return;
-  box.classList.remove('cart-pop');
-  void box.offsetWidth;
-  box.classList.add('cart-pop');
-  box.addEventListener('animationend', () => box.classList.remove('cart-pop'), { once: true });
+  const btn = document.getElementById('cartNavBtn');
+  if (!btn) return;
+  btn.classList.remove('cart-pop');
+  void btn.offsetWidth;
+  btn.classList.add('cart-pop');
+  btn.addEventListener('animationend', () => btn.classList.remove('cart-pop'), { once: true });
 }
 
 function showAddedToast(name, icon) {
@@ -96,7 +96,9 @@ function closeCart() {
 /* ── RENDER CART ── */
 function renderCart() {
   const n = cart.reduce((a, i) => a + i.qty, 0);
-  document.getElementById('cc').textContent = n;
+  const ccEl = document.getElementById('cc');
+  ccEl.textContent = n;
+  ccEl.style.display = n > 0 ? 'flex' : 'none';
   document.getElementById('drawerCount').textContent = n;
 
   const empty  = document.getElementById('drawerEmpty');

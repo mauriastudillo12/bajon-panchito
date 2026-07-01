@@ -487,37 +487,32 @@ body.cart-open #wspBtn {
 }
 /* ── CART NAV BUTTON ── */
 #cartNavBtn {
-  background: transparent; border: none;
   display: flex; align-items: center; gap: 8px;
-  cursor: pointer; font-family: 'Inter', sans-serif;
-  transition: all 0.2s; padding: 0;
+  background: #111; color: #fff;
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 8px 16px 8px 12px;
+  border-radius: 30px; cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.2s cubic-bezier(.4,0,.2,1);
+  position: relative;
 }
-.cart-icon-box {
-  position: relative; width: 42px; height: 42px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 12px;
-  display: flex; align-items: center; justify-content: center;
-  transition: all 0.2s;
-}
-#cartNavBtn:hover .cart-icon-box {
-  background: rgba(201,168,76,0.15);
+#cartNavBtn:hover {
+  background: #1A1A1A;
   border-color: rgba(201,168,76,0.4);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
+#cartNavBtn.cart-pop { animation: cart-pop 0.3s ease; }
 .cart-nav-label {
-  font-size: 10px; color: rgba(255,255,255,0.5);
+  font-size: 11px; font-weight: 600;
   letter-spacing: 0.8px; text-transform: uppercase;
-  transition: color 0.2s;
 }
-#cartNavBtn:hover .cart-nav-label { color: rgba(255,255,255,0.8); }
 #cc {
-  position: absolute; top: -6px; right: -6px;
   background: #C9A84C; color: #000;
   font-size: 9px; font-weight: 700;
   min-width: 18px; height: 18px;
   border-radius: 9px; padding: 0 5px;
-  display: flex; align-items: center; justify-content: center;
-  border: 2px solid #000;
+  display: none; align-items: center; justify-content: center;
 }
 
 @media (max-width: 600px) {
@@ -531,6 +526,7 @@ body.cart-open #wspBtn {
   .mitem-desc { display: none; }
   .menu-body { padding: 1.5rem 1rem 3rem; }
   .cart-nav-label { display: none; }
+  #cartNavBtn { padding: 8px 12px; }
 
   /* Hero — logo completo sin cortarse */
   .hero-bg {
