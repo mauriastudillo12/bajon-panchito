@@ -346,7 +346,12 @@ function initScrollAnimations() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', initScrollAnimations);
+document.addEventListener('DOMContentLoaded', () => {
+  initScrollAnimations();
+  setTimeout(() => {
+    document.getElementById('splash').classList.add('hide');
+  }, 1500);
+});
 
 // Scroll spy
 window.addEventListener('scroll', () => {
