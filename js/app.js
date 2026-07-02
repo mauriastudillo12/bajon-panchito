@@ -310,7 +310,7 @@ function showErrorToast(msg) {
 }
 
 /* ── TABS MENÚ ── */
-const catIds = ['empanadas','completos','churrascos','lomitos','hamburguesas','fajitas','papas','pizzas'];
+const catIds = ['empanadas','pastel','completos','churrascos','lomitos','fajitas','papas','pizzas','bebidas'];
 
 function scrollTocat(id, btn) {
   document.querySelectorAll('.mtab').forEach(t => t.classList.remove('on'));

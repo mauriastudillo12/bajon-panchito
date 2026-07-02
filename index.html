@@ -91,13 +91,14 @@
   <div class="menu-tabs-wrap">
     <div class="menu-tabs" id="menuTabs">
       <button class="mtab on"  onclick="scrollTocat('empanadas',this)">Empanadas</button>
+      <button class="mtab"     onclick="scrollTocat('pastel',this)">Pastel de Choclo</button>
       <button class="mtab"     onclick="scrollTocat('completos',this)">Completos</button>
       <button class="mtab"     onclick="scrollTocat('churrascos',this)">Churrascos</button>
       <button class="mtab"     onclick="scrollTocat('lomitos',this)">Lomitos</button>
-      <button class="mtab"     onclick="scrollTocat('hamburguesas',this)">Hamburguesas</button>
       <button class="mtab"     onclick="scrollTocat('fajitas',this)">Fajitas</button>
       <button class="mtab"     onclick="scrollTocat('papas',this)">Papas</button>
       <button class="mtab"     onclick="scrollTocat('pizzas',this)">Pizzas</button>
+      <button class="mtab"     onclick="scrollTocat('bebidas',this)">Bebidas</button>
     </div>
   </div>
 
@@ -124,8 +125,8 @@
           </div>
           <div class="mitem-right">
             <span class="mitem-badge mb-g">Popular</span>
-            <span class="mitem-price">$2.000 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Pino Molida',2000,'🫓','Empanadas')">+</button>
+            <span class="mitem-price">$2.500 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Pino Molida',2500,'🫓','Empanadas')">+</button>
           </div>
         </div>
 
@@ -136,8 +137,8 @@
             <div class="mitem-desc">Pino con carne picada a cuchillo, cebolla y huevo</div>
           </div>
           <div class="mitem-right">
-            <span class="mitem-price">$2.500 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Pino Carne Picada',2500,'🫓','Empanadas')">+</button>
+            <span class="mitem-price">$2.800 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Pino Carne Picada',2800,'🫓','Empanadas')">+</button>
           </div>
         </div>
 
@@ -185,8 +186,8 @@
             <div class="mitem-desc">Tomate, mozzarella y orégano</div>
           </div>
           <div class="mitem-right">
-            <span class="mitem-price">$3.000 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Napolitana',3000,'🫓','Empanadas')">+</button>
+            <span class="mitem-price">$3.500 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Napolitana',3500,'🫓','Empanadas')">+</button>
           </div>
         </div>
 
@@ -197,8 +198,8 @@
             <div class="mitem-desc">Mix de mariscos frescos</div>
           </div>
           <div class="mitem-right">
-            <span class="mitem-price">$3.000 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Marisco',3000,'🫓','Empanadas')">+</button>
+            <span class="mitem-price">$3.500 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Marisco',3500,'🫓','Empanadas')">+</button>
           </div>
         </div>
 
@@ -209,8 +210,8 @@
             <div class="mitem-desc">Pollo desmenuzado con queso</div>
           </div>
           <div class="mitem-right">
-            <span class="mitem-price">$3.000 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Pollo Queso',3000,'🫓','Empanadas')">+</button>
+            <span class="mitem-price">$3.500 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Pollo Queso',3500,'🫓','Empanadas')">+</button>
           </div>
         </div>
 
@@ -233,8 +234,8 @@
             <div class="mitem-desc">Choclo dulce con queso mantecoso</div>
           </div>
           <div class="mitem-right">
-            <span class="mitem-price">$2.500 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Choclo Queso',2500,'🫓','Empanadas')">+</button>
+            <span class="mitem-price">$3.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Choclo Queso',3000,'🫓','Empanadas')">+</button>
           </div>
         </div>
 
@@ -245,8 +246,8 @@
             <div class="mitem-desc">Aceitunas y queso fundido</div>
           </div>
           <div class="mitem-right">
-            <span class="mitem-price">$2.500 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Aceituna Queso',2500,'🫓','Empanadas')">+</button>
+            <span class="mitem-price">$3.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Aceituna Queso',3000,'🫓','Empanadas')">+</button>
           </div>
         </div>
 
@@ -257,8 +258,8 @@
             <div class="mitem-desc">Mechada jugosa con queso</div>
           </div>
           <div class="mitem-right">
-            <span class="mitem-price">$3.500 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Mechada Queso',3500,'🫓','Empanadas')">+</button>
+            <span class="mitem-price">$3.800 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Mechada Queso',3800,'🫓','Empanadas')">+</button>
           </div>
         </div>
 
@@ -277,13 +278,39 @@
         <div class="mitem">
           <div class="mitem-emoji" style="background:url('img/empanada.jpg') center/cover;font-size:0">&nbsp;</div>
           <div class="mitem-info">
+            <div class="mitem-name">Quiche Champiñón</div>
+            <div class="mitem-desc">Quiche cremoso de champiñones</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-badge mb-w">Nuevo</span>
+            <span class="mitem-price">$3.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Quiche Champiñón',3000,'🫓','Empanadas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/empanada.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Quiche Carne</div>
+            <div class="mitem-desc">Quiche jugoso con carne</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-badge mb-w">Nuevo</span>
+            <span class="mitem-price">$3.800 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Quiche Carne',3800,'🫓','Empanadas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/empanada.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
             <div class="mitem-name">Mallorquina Frita</div>
             <div class="mitem-desc">Masa frita rellena, crujiente y dorada</div>
           </div>
           <div class="mitem-right">
             <span class="mitem-badge mb-w">Frita</span>
-            <span class="mitem-price">$3.500 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Mallorquina Frita',3500,'🫓','Empanadas')">+</button>
+            <span class="mitem-price">$3.800 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Mallorquina Frita',3800,'🫓','Empanadas')">+</button>
           </div>
         </div>
 
@@ -295,47 +322,43 @@
           </div>
           <div class="mitem-right">
             <span class="mitem-badge mb-w">Horno</span>
-            <span class="mitem-price">$2.500 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Mallorquina Horno',2500,'🫓','Empanadas')">+</button>
+            <span class="mitem-price">$3.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Mallorquina Horno',3000,'🫓','Empanadas')">+</button>
           </div>
         </div>
 
         <div class="mitem">
           <div class="mitem-emoji" style="background:url('img/empanada.jpg') center/cover;font-size:0">&nbsp;</div>
           <div class="mitem-info">
-            <div class="mitem-name">Queso Mil Hoja</div>
+            <div class="mitem-name">Queso Mil Hojas</div>
             <div class="mitem-desc">Capas de hojaldre crujiente con queso</div>
           </div>
           <div class="mitem-right">
             <span class="mitem-badge mb-w">Especial</span>
-            <span class="mitem-price">$2.500 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Queso Mil Hoja',2500,'🫓','Empanadas')">+</button>
+            <span class="mitem-price">$3.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Queso Mil Hojas',3000,'🫓','Empanadas')">+</button>
           </div>
         </div>
 
-        <div class="mitem">
-          <div class="mitem-emoji" style="background:url('img/empanada.jpg') center/cover;font-size:0">&nbsp;</div>
-          <div class="mitem-info">
-            <div class="mitem-name">Ingrediente Extra</div>
-            <div class="mitem-desc">Agrega un ingrediente adicional a tu empanada</div>
-          </div>
-          <div class="mitem-right">
-            <span class="mitem-badge mb-w">Adicional</span>
-            <span class="mitem-price">$700 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Ingrediente Extra',700,'🫓','Empanadas')">+</button>
-          </div>
-        </div>
+      </div>
+    </div>
+
+    <!-- ── PASTEL DE CHOCLO ── -->
+    <div class="cat-block" id="cat-pastel">
+      <div class="cat-title">Pastel de Choclo</div>
+      <div class="cat-line"><div class="cat-line-bar"></div><span class="cat-line-sub">El favorito de la casa</span></div>
+      <div class="items-list">
 
         <div class="mitem">
-          <div class="mitem-emoji" style="background:url('img/empanada.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-emoji">🌽</div>
           <div class="mitem-info">
             <div class="mitem-name">Pastel de Choclo</div>
             <div class="mitem-desc">El favorito de la casa, preparado al momento</div>
           </div>
           <div class="mitem-right">
             <span class="mitem-badge" style="background:#C9A84C;color:#000">Destacado</span>
-            <span class="mitem-price">$4.000 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Pastel de Choclo',4000,'🌽','Empanadas')">+</button>
+            <span class="mitem-price">$4.500 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Pastel de Choclo',4500,'🌽','Pastel de Choclo')">+</button>
           </div>
         </div>
 
@@ -470,40 +493,6 @@
       </div>
     </div>
 
-    <!-- ── HAMBURGUESAS ── -->
-    <div class="cat-block" id="cat-hamburguesas">
-      <div class="cat-title">Hamburguesas</div>
-      <div class="cat-line"><div class="cat-line-bar"></div><span class="cat-line-sub">Jugosas y bien condimentadas</span></div>
-      <div class="items-list">
-
-        <div class="mitem">
-          <div class="mitem-emoji">🍔</div>
-          <div class="mitem-info">
-            <div class="mitem-name">Hamburguesa Italiana Carne</div>
-            <div class="mitem-desc">Vacuno con palta, tomate y mayo</div>
-          </div>
-          <div class="mitem-right">
-            <span class="mitem-badge mb-g">Popular</span>
-            <span class="mitem-price">$5.500 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Hamburguesa Italiana Carne',5500,'🍔','Hamburguesas')">+</button>
-          </div>
-        </div>
-
-        <div class="mitem">
-          <div class="mitem-emoji">🍔</div>
-          <div class="mitem-info">
-            <div class="mitem-name">Hamburguesa Italiana Pollo</div>
-            <div class="mitem-desc">Pollo con palta, tomate y mayo</div>
-          </div>
-          <div class="mitem-right">
-            <span class="mitem-price">$5.000 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Hamburguesa Italiana Pollo',5000,'🍔','Hamburguesas')">+</button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
     <!-- ── FAJITAS ── -->
     <div class="cat-block" id="cat-fajitas">
       <div class="cat-title">Fajitas</div>
@@ -559,26 +548,49 @@
         <div class="mitem">
           <div class="mitem-emoji" style="background:url('img/papas.jpg') center/cover;font-size:0">&nbsp;</div>
           <div class="mitem-info">
-            <div class="mitem-name">Papas Fritas</div>
+            <div class="mitem-name">Papas Fritas Pequeña</div>
             <div class="mitem-desc">Doradas y crujientes al momento</div>
           </div>
           <div class="mitem-right">
-            <span class="mitem-badge mb-g">Popular</span>
-            <span class="mitem-price">$2.500 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Papas Fritas',2500,'🍟','Papas')">+</button>
+            <span class="mitem-price">$2.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Papas Fritas Pequeña',2000,'🍟','Papas')">+</button>
           </div>
         </div>
 
         <div class="mitem">
           <div class="mitem-emoji" style="background:url('img/papas.jpg') center/cover;font-size:0">&nbsp;</div>
           <div class="mitem-info">
-            <div class="mitem-name">Papas Supime</div>
-            <div class="mitem-desc">Con toppings especiales, versión premium</div>
+            <div class="mitem-name">Papas Fritas Mediana</div>
+            <div class="mitem-desc">Doradas y crujientes al momento</div>
           </div>
           <div class="mitem-right">
-            <span class="mitem-badge mb-w">Especial</span>
-            <span class="mitem-price">$3.500 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Papas Supime',3500,'🍟','Papas')">+</button>
+            <span class="mitem-badge mb-g">Popular</span>
+            <span class="mitem-price">$3.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Papas Fritas Mediana',3000,'🍟','Papas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/papas.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Papas Fritas Grande</div>
+            <div class="mitem-desc">Doradas y crujientes al momento</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-price">$4.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Papas Fritas Grande',4000,'🍟','Papas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/papas.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Papas Fritas Familiar</div>
+            <div class="mitem-desc">Doradas y crujientes al momento</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-price">$5.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Papas Fritas Familiar',5000,'🍟','Papas')">+</button>
           </div>
         </div>
 
@@ -632,6 +644,87 @@
       </div>
     </div>
 
+    <!-- ── BEBIDAS ── -->
+    <div class="cat-block" id="cat-bebidas">
+      <div class="cat-title">Bebidas</div>
+      <div class="cat-line"><div class="cat-line-bar"></div><span class="cat-line-sub">Frías y refrescantes</span></div>
+      <div class="items-list">
+
+        <div class="mitem">
+          <div class="mitem-emoji">🥤</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Lata</div>
+            <div class="mitem-desc">Coca Cola, Kem, Sprite, Coca Cola Zero, Pepsi</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-price">$1.100 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Lata',1100,'🥤','Bebidas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji">🍾</div>
+          <div class="mitem-info">
+            <div class="mitem-name">1¼ litro</div>
+            <div class="mitem-desc">Botella familiar 1.25 litros</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-price">$1.700 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('1¼ litro',1700,'🍾','Bebidas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji">🍶</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Medio litro</div>
+            <div class="mitem-desc">Botella personal 500 ml</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-price">$1.300 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Medio litro',1300,'🍶','Bebidas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji">⚡</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Bebida Energética</div>
+            <div class="mitem-desc">Energía para tu día</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-price">$1.500 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Bebida Energética',1500,'⚡','Bebidas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji">💧</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Agua</div>
+            <div class="mitem-desc">Con o sin gas</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-price">$1.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Agua',1000,'💧','Bebidas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji">🧃</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Jugo</div>
+            <div class="mitem-desc">Jugos de fruta</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-price">$1.200 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Jugo',1200,'🧃','Bebidas')">+</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </div><!-- /menu-body -->
 </div><!-- /menu-v2 -->
 
@@ -679,7 +772,7 @@
       <div class="promo-title">Pastel de Choclo — el favorito de la casa</div>
       <p class="promo-sub">Preparado al momento · Mar–Dom 9:30–17:30</p>
     </div>
-    <button class="promo-btn" onclick="add('Pastel de Choclo',4000,'🌽','Empanadas')">Agregar al pedido</button>
+    <button class="promo-btn" onclick="add('Pastel de Choclo',4500,'🌽','Pastel de Choclo')">Agregar al pedido</button>
   </div>
 </div>
 
