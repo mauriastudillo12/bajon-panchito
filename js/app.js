@@ -3,6 +3,7 @@
    ═══════════════════════════════════════ */
 
 let cart = [];
+let isDelivery = false;
 
 /* ── SEGURIDAD / VALIDACIÓN ── */
 function sanitize(str) {
@@ -37,6 +38,17 @@ function showSuccessToast(msg) {
     t.style.animation = 'toastOut .25s ease forwards';
     setTimeout(() => t.remove(), 250);
   }, 2800);
+}
+
+/* ── DELIVERY TOGGLE ── */
+function toggleDelivery() {
+  isDelivery = !isDelivery;
+  const sw   = document.getElementById('deliverySwitch');
+  const dot  = document.getElementById('deliverySwitchDot');
+  const addr = document.getElementById('deliveryAddress');
+  sw.style.background  = isDelivery ? '#C9A84C' : '#DDD';
+  dot.style.transform  = isDelivery ? 'translateX(18px)' : 'translateX(0)';
+  addr.style.display   = isDelivery ? 'flex' : 'none';
 }
 
 /* ── ADD TO CART ── */
@@ -188,9 +200,11 @@ async function confirmOrder() {
     return;
   }
 
-  const rawNombre   = document.getElementById('clientName').value.trim();
-  const rawTelefono = document.getElementById('clientPhone').value.trim();
-  const rawComment  = document.getElementById('clientComment').value.trim();
+  const rawNombre     = document.getElementById('clientName').value.trim();
+  const rawTelefono   = document.getElementById('clientPhone').value.trim();
+  const rawComment    = document.getElementById('clientComment').value.trim();
+  const rawAddress    = isDelivery ? (document.getElementById('clientAddress')?.value.trim() || '') : '';
+  const rawAddressRef = isDelivery ? (document.getElementById('clientAddressRef')?.value.trim() || '') : '';
 
   if (!rawNombre) {
     document.getElementById('clientName').style.borderColor = '#C9A84C';
@@ -198,6 +212,13 @@ async function confirmOrder() {
     return;
   }
   document.getElementById('clientName').style.borderColor = '#E8E5E0';
+
+  if (isDelivery && !rawAddress) {
+    const addrEl = document.getElementById('clientAddress');
+    if (addrEl) { addrEl.style.borderColor = '#C9A84C'; addrEl.focus(); }
+    showFormError('Ingresa tu dirección de entrega.');
+    return;
+  }
 
   if (rawTelefono && !validatePhone(rawTelefono)) {
     document.getElementById('clientPhone').style.borderColor = '#C9A84C';
@@ -210,6 +231,8 @@ async function confirmOrder() {
   const nombre   = sanitize(rawNombre).slice(0, 60);
   const telefono = sanitize(rawTelefono).slice(0, 20);
   const comment  = sanitize(rawComment).slice(0, 300);
+  const address  = sanitize(rawAddress).slice(0, 150);
+  const addressRef = sanitize(rawAddressRef).slice(0, 100);
   const total    = Math.round(cart.reduce((a, i) => a + i.price * i.qty, 0));
 
   const btn     = document.getElementById('confirmBtn');
@@ -218,12 +241,15 @@ async function confirmOrder() {
   if (btnText) btnText.textContent = 'Enviando…';
 
   const result = await insertPedido({
-    cliente_nombre:   nombre,
-    cliente_telefono: telefono || null,
+    cliente_nombre:     nombre,
+    cliente_telefono:   telefono || null,
     items: cart.map(i => ({ nombre: i.name, cantidad: i.qty, precio: i.price, categoria: i.categoria || '' })),
     total,
-    origen:     'web',
-    comentario: comment || null,
+    origen:             'web',
+    comentario:         comment || null,
+    es_delivery:        isDelivery,
+    direccion_entrega:  address || null,
+    referencia_entrega: addressRef || null,
   });
 
   if (!result.ok) {
@@ -234,8 +260,18 @@ async function confirmOrder() {
     return;
   }
 
-  log('Pedido guardado:', { cliente_nombre: nombre, total, items: cart.map(i => i.name + ' ×' + i.qty), origen: 'web' });
+  log('Pedido guardado:', { cliente_nombre: nombre, total, items: cart.map(i => i.name + ' ×' + i.qty), origen: 'web', es_delivery: isDelivery });
   sessionStorage.setItem('lastOrderTs', Date.now().toString());
+
+  // Snapshot delivery info and reset state before clearing
+  const deliverySnap = isDelivery ? { address, addressRef } : null;
+  isDelivery = false;
+  const sw  = document.getElementById('deliverySwitch');
+  const dot = document.getElementById('deliverySwitchDot');
+  const da  = document.getElementById('deliveryAddress');
+  if (sw)  sw.style.background = '#DDD';
+  if (dot) dot.style.transform = 'translateX(0)';
+  if (da)  da.style.display    = 'none';
 
   // Snapshot cart before clearing
   const orderItems = cart.map(i => ({ name: i.name, qty: i.qty, price: i.price }));
@@ -245,11 +281,11 @@ async function confirmOrder() {
   clearCart();
   closeCart();
   // Wait for drawer close animation before showing modal
-  setTimeout(() => showOrderModal(nombre, orderItems, total, comment), 350);
+  setTimeout(() => showOrderModal(nombre, orderItems, total, comment, deliverySnap), 350);
 }
 
 /* ── ORDER CONFIRMATION MODAL ── */
-function showOrderModal(nombre, items, total, comment) {
+function showOrderModal(nombre, items, total, comment, delivery = null) {
   const itemsHtml = items.map(i =>
     `<div class="order-modal-item">
       <span>${i.qty}× ${i.name}</span>
@@ -259,6 +295,13 @@ function showOrderModal(nombre, items, total, comment) {
 
   const commentHtml = comment
     ? `<div style="font-size:11px;color:#999;margin-top:.6rem;font-style:italic;padding-top:.5rem;border-top:1px solid #E8E5E0;">📝 ${comment}</div>`
+    : '';
+
+  const deliveryHtml = delivery
+    ? `<div style="font-size:11px;color:#555;margin-top:.6rem;padding-top:.5rem;border-top:1px solid #E8E5E0;">
+        🛵 <strong>Delivery</strong><br>
+        📍 ${delivery.address}${delivery.addressRef ? `<br><span style="color:#999">ℹ️ ${delivery.addressRef}</span>` : ''}
+      </div>`
     : '';
 
   const overlay = document.createElement('div');
@@ -272,6 +315,7 @@ function showOrderModal(nombre, items, total, comment) {
         <div class="order-modal-client">👤 ${nombre}</div>
         ${itemsHtml}
         ${commentHtml}
+        ${deliveryHtml}
         <hr class="order-modal-divider">
         <div class="order-modal-total">
           <span>Total</span>
@@ -310,7 +354,7 @@ function showErrorToast(msg) {
 }
 
 /* ── TABS MENÚ ── */
-const catIds = ['empanadas','pastel','completos','churrascos','lomitos','fajitas','papas','pizzas','bebidas'];
+const catIds = ['empanadas','pastel','completos','churrascos','lomitos','fajitas','papas','bebidas'];
 
 function scrollTocat(id, btn) {
   document.querySelectorAll('.mtab').forEach(t => t.classList.remove('on'));

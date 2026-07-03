@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com https://cdn.jsdelivr.net; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data:; connect-src 'none';">
+  <title>Carta — El Bajón de Panchito</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Inter',sans-serif;background:#000;color:#FFF;min-height:100vh;padding-top:92px}
+
+    /* ── HEADER ── */
+    .carta-header{
+      position:fixed;top:0;left:0;right:0;z-index:200;
+      background:#000;
+      border-bottom:1px solid rgba(201,168,76,.22);
+      padding:14px 16px 10px;
+      text-align:center;
+    }
+    .carta-logo{
+      font-family:'Playfair Display',serif;
+      font-style:italic;
+      font-size:22px;
+      color:#FFF;
+      line-height:1.2;
+      margin-bottom:3px;
+    }
+    .carta-logo span{color:#C9A84C}
+    .carta-sub{
+      font-size:10px;
+      letter-spacing:2px;
+      text-transform:uppercase;
+      color:#444;
+      margin-bottom:5px;
+    }
+    .carta-hours{
+      font-size:12px;
+      color:#C9A84C;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:5px;
+      line-height:1;
+    }
+    .carta-hours i{font-size:13px;vertical-align:-1px}
+
+    /* ── MINI HERO ── */
+    .mini-hero{
+      height:180px;
+      background:url('img/hero.jpg') center 20%/cover no-repeat;
+      filter:brightness(0.7);
+    }
+
+    /* ── TABS ── */
+    .tabs-bar{
+      position:sticky;
+      top:92px;
+      z-index:100;
+      background:#080808;
+      border-bottom:1px solid #1A1A1A;
+    }
+    .tabs-scroll{
+      display:flex;
+      overflow-x:auto;
+      padding:10px 12px;
+      gap:6px;
+      scrollbar-width:none;
+      -webkit-overflow-scrolling:touch;
+      overscroll-behavior-x:contain;
+    }
+    .tabs-scroll::-webkit-scrollbar{display:none}
+    .ctab{
+      flex-shrink:0;
+      padding:7px 15px;
+      font-size:12px;
+      font-weight:600;
+      font-family:'Inter',sans-serif;
+      border:1px solid #222;
+      border-radius:20px;
+      background:transparent;
+      color:#666;
+      cursor:pointer;
+      transition:background .18s,color .18s,border-color .18s;
+      white-space:nowrap;
+    }
+    .ctab.active{
+      background:#C9A84C;
+      color:#000;
+      border-color:#C9A84C;
+    }
+
+    /* ── MAIN ── */
+    .carta-main{
+      max-width:600px;
+      margin:0 auto;
+      padding-bottom:40px;
+    }
+
+    /* ── SECTION ── */
+    .carta-section{
+      padding:28px 20px 10px;
+      scroll-margin-top:155px;
+    }
+    .cat-hdr{margin-bottom:18px}
+    .cat-title{
+      font-family:'Playfair Display',serif;
+      font-style:italic;
+      font-size:26px;
+      color:#C9A84C;
+      margin-bottom:8px;
+      line-height:1.1;
+    }
+    .cat-line{
+      height:1px;
+      background:linear-gradient(90deg,rgba(201,168,76,.7),transparent);
+    }
+    .cat-subtitle{
+      font-size:11px;
+      color:#444;
+      letter-spacing:.5px;
+      margin-top:6px;
+    }
+
+    /* ── PRODUCT ROW ── */
+    .cat-items{padding:0}
+    .citem-wrap{
+      padding:11px 0;
+      border-bottom:1px solid rgba(255,255,255,.05);
+    }
+    .citem-wrap:last-child{border-bottom:none}
+    .citem{
+      display:flex;
+      align-items:baseline;
+    }
+    .citem-name{
+      font-size:14.5px;
+      color:#E8E8E8;
+      flex-shrink:0;
+      max-width:58%;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .citem-dots{
+      flex:1;
+      min-width:12px;
+      border-bottom:1.5px dotted rgba(201,168,76,.22);
+      margin:0 8px;
+      position:relative;
+      bottom:4px;
+    }
+    .citem-price{
+      font-size:14.5px;
+      font-weight:700;
+      color:#C9A84C;
+      flex-shrink:0;
+      font-variant-numeric:tabular-nums;
+      letter-spacing:.2px;
+    }
+    .citem-desc{
+      font-size:12px;
+      color:#4A4A4A;
+      margin-top:4px;
+      line-height:1.45;
+    }
+
+    /* ── SECTION SEPARATOR ── */
+    .section-sep{
+      height:1px;
+      background:linear-gradient(90deg,transparent,rgba(201,168,76,.15),transparent);
+      margin:4px 20px 0;
+    }
+
+    /* ── FOOTER ── */
+    .carta-footer{
+      background:#000;
+      border-top:1px solid #111;
+      text-align:center;
+      padding:28px 20px 48px;
+    }
+    .footer-name{
+      font-family:'Playfair Display',serif;
+      font-style:italic;
+      font-size:17px;
+      color:#555;
+      margin-bottom:8px;
+    }
+    .footer-info{
+      font-size:12px;
+      color:#3A3A3A;
+      line-height:1.8;
+      margin-bottom:20px;
+    }
+    .btn-pedido{
+      display:inline-block;
+      background:#C9A84C;
+      color:#000;
+      font-family:'Inter',sans-serif;
+      font-size:13px;
+      font-weight:700;
+      letter-spacing:.4px;
+      padding:13px 28px;
+      border-radius:8px;
+      text-decoration:none;
+    }
+
+    @media(max-width:480px){
+      .carta-logo{font-size:20px}
+      .cat-title{font-size:23px}
+      .citem-name,.citem-price{font-size:14px}
+      .citem-name{max-width:55%}
+      .carta-section{padding:24px 16px 8px}
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════
+     HEADER
+══════════════════════════ -->
+<header class="carta-header">
+  <div class="carta-logo">El Bajón <span>de Panchito</span></div>
+  <div class="carta-sub">Carta digital</div>
+  <div class="carta-hours">
+    <i class="ti ti-clock-hour-4"></i> Mar–Dom · 9:30 – 17:30 hrs
+  </div>
+</header>
+
+<!-- ══════════════════════════
+     MINI HERO
+══════════════════════════ -->
+<div class="mini-hero"></div>
+
+<!-- ══════════════════════════
+     TABS
+══════════════════════════ -->
+<nav class="tabs-bar" aria-label="Categorías">
+  <div class="tabs-scroll">
+    <button class="ctab active" data-target="empanadas" onclick="goToSection('empanadas',this)">Empanadas</button>
+    <button class="ctab" data-target="pastel"     onclick="goToSection('pastel',this)">Pastel de Choclo</button>
+    <button class="ctab" data-target="completos"  onclick="goToSection('completos',this)">Completos</button>
+    <button class="ctab" data-target="churrascos" onclick="goToSection('churrascos',this)">Churrascos</button>
+    <button class="ctab" data-target="lomitos"    onclick="goToSection('lomitos',this)">Lomitos</button>
+    <button class="ctab" data-target="fajitas"    onclick="goToSection('fajitas',this)">Fajitas</button>
+    <button class="ctab" data-target="papas"      onclick="goToSection('papas',this)">Papas</button>
+    <button class="ctab" data-target="bebidas"    onclick="goToSection('bebidas',this)">Bebidas</button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════
+     MENÚ
+══════════════════════════ -->
+<main class="carta-main">
+
+  <!-- ── EMPANADAS ── -->
+  <section class="carta-section" id="empanadas">
+    <div class="cat-hdr">
+      <h2 class="cat-title">Empanadas</h2>
+      <div class="cat-line"></div>
+      <div class="cat-subtitle">Horneadas · también disponibles fritas</div>
+    </div>
+    <div class="cat-items">
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Pino Molida</span><span class="citem-dots"></span><span class="citem-price">$2.500</span></div></div>
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Pino Carne Picada</span><span class="citem-dots"></span><span class="citem-price">$2.800</span></div></div>
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Camarón Queso</span><span class="citem-dots"></span><span class="citem-price">$2.500</span></div></div>
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Queso Solo</span><span class="citem-dots"></span><span class="citem-price">$2.000</span></div></div>
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Champiñón Queso</span><span class="citem-dots"></span><span class="citem-price">$3.000</span></div></div>
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Napolitana</span><span class="citem-dots"></span><span class="citem-price">$3.500</span></div></div>
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Marisco</span><span class="citem-dots"></span><span class="citem-price">$3.500</span></div></div>
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Pollo Queso</span><span class="citem-dots"></span><span class="citem-price">$3.500</span></div></div>
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Churrasco Queso</span><span class="citem-dots"></span><span class="citem-price">$3.000</span></div></div>
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Choclo Queso</span><span class="citem-dots"></span><span class="citem-price">$3.000</span></div></div>
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Aceituna Queso</span><span class="citem-dots"></span><span class="citem-price">$3.000</span></div></div>
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Mechada Queso</span><span class="citem-dots"></span><span class="citem-price">$3.800</span></div></div>
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Jamón Queso</span><span class="citem-dots"></span><span class="citem-price">$3.000</span></div></div>
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Quiche Champiñón</span><span class="citem-dots"></span><span class="citem-price">$3.000</span></div></div>
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Quiche Carne</span><span class="citem-dots"></span><span class="citem-price">$3.800</span></div></div>
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Mallorquina Frita</span><span class="citem-dots"></span><span class="citem-price">$3.800</span></div></div>
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Mallorquina Horno</span><span class="citem-dots"></span><span class="citem-price">$3.000</span></div></div>
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Queso Mil Hojas</span><span class="citem-dots"></span><span class="citem-price">$3.000</span></div></div>
+    </div>
+  </section>
+  <div class="section-sep"></div>
+
+  <!-- ── PASTEL DE CHOCLO ── -->
+  <section class="carta-section" id="pastel">
+    <div class="cat-hdr">
+      <h2 class="cat-title">Pastel de Choclo</h2>
+      <div class="cat-line"></div>
+    </div>
+    <div class="cat-items">
+      <div class="citem-wrap">
+        <div class="citem"><span class="citem-name">Pastel de Choclo</span><span class="citem-dots"></span><span class="citem-price">$4.500</span></div>
+        <div class="citem-desc">Tradicional con pino, huevo y aceitunas</div>
+      </div>
+    </div>
+  </section>
+  <div class="section-sep"></div>
+
+  <!-- ── COMPLETOS ── -->
+  <section class="carta-section" id="completos">
+    <div class="cat-hdr">
+      <h2 class="cat-title">Completos</h2>
+      <div class="cat-line"></div>
+    </div>
+    <div class="cat-items">
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Completo</span><span class="citem-dots"></span><span class="citem-price">$3.500</span></div></div>
+      <div class="citem-wrap">
+        <div class="citem"><span class="citem-name">Completo Italiano</span><span class="citem-dots"></span><span class="citem-price">$4.500</span></div>
+        <div class="citem-desc">Palta, tomate y mayo</div>
+      </div>
+      <div class="citem-wrap">
+        <div class="citem"><span class="citem-name">Completo Dinámico</span><span class="citem-dots"></span><span class="citem-price">$5.000</span></div>
+        <div class="citem-desc">Con todo: palta, tomate, mayo, sauerkraut</div>
+      </div>
+    </div>
+  </section>
+  <div class="section-sep"></div>
+
+  <!-- ── CHURRASCOS ── -->
+  <section class="carta-section" id="churrascos">
+    <div class="cat-hdr">
+      <h2 class="cat-title">Churrascos</h2>
+      <div class="cat-line"></div>
+    </div>
+    <div class="cat-items">
+      <div class="citem-wrap">
+        <div class="citem"><span class="citem-name">Churrasco Italiano</span><span class="citem-dots"></span><span class="citem-price">$5.500</span></div>
+        <div class="citem-desc">Palta, tomate y mayo</div>
+      </div>
+      <div class="citem-wrap">
+        <div class="citem"><span class="citem-name">Churrasco Chacarero</span><span class="citem-dots"></span><span class="citem-price">$5.500</span></div>
+        <div class="citem-desc">Porotos verdes, tomate y ají verde</div>
+      </div>
+      <div class="citem-wrap">
+        <div class="citem"><span class="citem-name">Barros Luco</span><span class="citem-dots"></span><span class="citem-price">$5.000</span></div>
+        <div class="citem-desc">Churrasco con queso derretido</div>
+      </div>
+    </div>
+  </section>
+  <div class="section-sep"></div>
+
+  <!-- ── LOMITOS ── -->
+  <section class="carta-section" id="lomitos">
+    <div class="cat-hdr">
+      <h2 class="cat-title">Lomitos</h2>
+      <div class="cat-line"></div>
+    </div>
+    <div class="cat-items">
+      <div class="citem-wrap">
+        <div class="citem"><span class="citem-name">Lomito Italiano</span><span class="citem-dots"></span><span class="citem-price">$6.000</span></div>
+        <div class="citem-desc">Palta, tomate y mayo</div>
+      </div>
+      <div class="citem-wrap">
+        <div class="citem"><span class="citem-name">Lomito Chacarero</span><span class="citem-dots"></span><span class="citem-price">$6.000</span></div>
+        <div class="citem-desc">Porotos verdes, tomate y ají verde</div>
+      </div>
+    </div>
+  </section>
+  <div class="section-sep"></div>
+
+  <!-- ── FAJITAS ── -->
+  <section class="carta-section" id="fajitas">
+    <div class="cat-hdr">
+      <h2 class="cat-title">Fajitas</h2>
+      <div class="cat-line"></div>
+      <div class="cat-subtitle">Servidas con tortilla, verduras salteadas y crema</div>
+    </div>
+    <div class="cat-items">
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Fajita de Carne</span><span class="citem-dots"></span><span class="citem-price">$6.500</span></div></div>
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Fajita de Pollo</span><span class="citem-dots"></span><span class="citem-price">$6.000</span></div></div>
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Fajita Mixta</span><span class="citem-dots"></span><span class="citem-price">$7.000</span></div></div>
+    </div>
+  </section>
+  <div class="section-sep"></div>
+
+  <!-- ── PAPAS ── -->
+  <section class="carta-section" id="papas">
+    <div class="cat-hdr">
+      <h2 class="cat-title">Papas Fritas</h2>
+      <div class="cat-line"></div>
+    </div>
+    <div class="cat-items">
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Pequeña</span><span class="citem-dots"></span><span class="citem-price">$2.000</span></div></div>
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Mediana</span><span class="citem-dots"></span><span class="citem-price">$3.000</span></div></div>
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Grande</span><span class="citem-dots"></span><span class="citem-price">$4.000</span></div></div>
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Familiar</span><span class="citem-dots"></span><span class="citem-price">$5.000</span></div></div>
+    </div>
+  </section>
+  <div class="section-sep"></div>
+
+  <!-- ── BEBIDAS ── -->
+  <section class="carta-section" id="bebidas">
+    <div class="cat-hdr">
+      <h2 class="cat-title">Bebidas</h2>
+      <div class="cat-line"></div>
+    </div>
+    <div class="cat-items">
+      <div class="citem-wrap">
+        <div class="citem"><span class="citem-name">Lata</span><span class="citem-dots"></span><span class="citem-price">$1.100</span></div>
+        <div class="citem-desc">Coca Cola, Pepsi, Sprite, Kem, Coca Cola Zero</div>
+      </div>
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">1¼ litro</span><span class="citem-dots"></span><span class="citem-price">$1.700</span></div></div>
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Medio litro</span><span class="citem-dots"></span><span class="citem-price">$1.300</span></div></div>
+      <div class="citem-wrap">
+        <div class="citem"><span class="citem-name">Bebida Energética</span><span class="citem-dots"></span><span class="citem-price">$1.500</span></div>
+      </div>
+      <div class="citem-wrap">
+        <div class="citem"><span class="citem-name">Agua</span><span class="citem-dots"></span><span class="citem-price">$1.000</span></div>
+        <div class="citem-desc">Con o sin gas</div>
+      </div>
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Jugo</span><span class="citem-dots"></span><span class="citem-price">$1.200</span></div></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ══════════════════════════
+     FOOTER
+══════════════════════════ -->
+<footer class="carta-footer">
+  <div class="footer-name">El Bajón de Panchito</div>
+  <div class="footer-info">
+    General Gambino 4190, Conchalí, Santiago<br>
+    +56 9 6864 7659
+  </div>
+  <a href="index.html" class="btn-pedido">Hacer pedido online →</a>
+</footer>
+
+<script>
+function goToSection(id, btn) {
+  document.querySelectorAll('.ctab').forEach(t => t.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  const section = document.getElementById(id);
+  if (section) section.scrollIntoView({ behavior: 'smooth' });
+}
+
+/* Auto-highlight tab on scroll */
+const sections = document.querySelectorAll('.carta-section');
+const tabBtns  = document.querySelectorAll('.ctab');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const id = entry.target.id;
+    tabBtns.forEach(t => t.classList.toggle('active', t.dataset.target === id));
+    const activeTab = document.querySelector(`.ctab[data-target="${id}"]`);
+    if (activeTab) activeTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  });
+}, {
+  threshold: 0.3,
+  rootMargin: '-130px 0px -45% 0px',
+});
+
+sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>

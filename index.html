@@ -97,7 +97,7 @@
       <button class="mtab"     onclick="scrollTocat('lomitos',this)">Lomitos</button>
       <button class="mtab"     onclick="scrollTocat('fajitas',this)">Fajitas</button>
       <button class="mtab"     onclick="scrollTocat('papas',this)">Papas</button>
-      <button class="mtab"     onclick="scrollTocat('pizzas',this)">Pizzas</button>
+
       <button class="mtab"     onclick="scrollTocat('bebidas',this)">Bebidas</button>
     </div>
   </div>
@@ -597,53 +597,6 @@
       </div>
     </div>
 
-    <!-- ── PIZZAS ── -->
-    <div class="cat-block" id="cat-pizzas">
-      <div class="cat-title">Pizzas Individuales</div>
-      <div class="cat-line"><div class="cat-line-bar"></div><span class="cat-line-sub">Masa artesanal horneada al momento</span></div>
-      <div class="items-list">
-
-        <div class="mitem">
-          <div class="mitem-emoji">🍕</div>
-          <div class="mitem-info">
-            <div class="mitem-name">Pizza Napolitana</div>
-            <div class="mitem-desc">Salsa de tomate, queso, aceitunas y orégano</div>
-          </div>
-          <div class="mitem-right">
-            <span class="mitem-badge mb-g">Popular</span>
-            <span class="mitem-price">$5.500 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Pizza Napolitana',5500,'🍕','Pizzas')">+</button>
-          </div>
-        </div>
-
-        <div class="mitem">
-          <div class="mitem-emoji">🍕</div>
-          <div class="mitem-info">
-            <div class="mitem-name">Pizza Peperoni</div>
-            <div class="mitem-desc">Pepperoni, mozzarella y salsa de tomate</div>
-          </div>
-          <div class="mitem-right">
-            <span class="mitem-price">$6.000 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Pizza Peperoni',6000,'🍕','Pizzas')">+</button>
-          </div>
-        </div>
-
-        <div class="mitem">
-          <div class="mitem-emoji">🍕</div>
-          <div class="mitem-info">
-            <div class="mitem-name">Pizza Vegetariana</div>
-            <div class="mitem-desc">Verduras frescas, queso y salsa casera</div>
-          </div>
-          <div class="mitem-right">
-            <span class="mitem-badge mb-w">Veggie</span>
-            <span class="mitem-price">$5.500 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Pizza Vegetariana',5500,'🍕','Pizzas')">+</button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
     <!-- ── BEBIDAS ── -->
     <div class="cat-block" id="cat-bebidas">
       <div class="cat-title">Bebidas</div>
@@ -862,6 +815,46 @@
 
       <!-- Formulario -->
       <div style="display:flex;flex-direction:column;gap:10px;">
+
+        <!-- Delivery toggle -->
+        <div id="deliveryToggle" style="
+          display:flex;align-items:center;gap:12px;
+          padding:14px 16px;background:#F8F6F2;
+          border-radius:8px;border:1px solid #E8E5E0;cursor:pointer;
+        " onclick="toggleDelivery()">
+          <div id="deliverySwitch" style="
+            width:42px;height:24px;border-radius:12px;
+            background:#DDD;position:relative;
+            transition:background 0.2s;flex-shrink:0;
+          ">
+            <div id="deliverySwitchDot" style="
+              width:20px;height:20px;border-radius:50%;
+              background:#fff;position:absolute;top:2px;left:2px;
+              transition:transform 0.2s;box-shadow:0 1px 4px rgba(0,0,0,0.2);
+            "></div>
+          </div>
+          <div>
+            <div style="font-size:13px;font-weight:600;color:#000">¿Quieres delivery? 🛵</div>
+            <div style="font-size:11px;color:#999;font-weight:300">Activa para ingresar tu dirección</div>
+          </div>
+        </div>
+
+        <!-- Dirección (visible solo si delivery activo) -->
+        <div id="deliveryAddress" style="display:none;display:flex;flex-direction:column;gap:8px;">
+          <input id="clientAddress" type="text" placeholder="Dirección de entrega *"
+            maxlength="150"
+            style="width:100%;padding:12px;border:1px solid #E8E5E0;border-radius:6px;
+            font-family:'Inter',sans-serif;font-size:16px;outline:none;transition:border-color .2s;"
+            onfocus="this.style.borderColor='#C9A84C'"
+            onblur="this.style.borderColor='#E8E5E0'">
+          <input id="clientAddressRef" type="text" placeholder="Referencias (depto, piso, color de casa...)"
+            maxlength="100"
+            style="width:100%;padding:12px;border:1px solid #E8E5E0;border-radius:6px;
+            font-family:'Inter',sans-serif;font-size:16px;outline:none;transition:border-color .2s;"
+            onfocus="this.style.borderColor='#C9A84C'"
+            onblur="this.style.borderColor='#E8E5E0'">
+        </div>
+
         <input id="clientName" type="text" placeholder="Tu nombre *" class="checkout-input"
           maxlength="60" autocomplete="name">
         <input id="clientPhone" type="tel" placeholder="Tu teléfono (opcional)"

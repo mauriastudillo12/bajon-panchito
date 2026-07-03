@@ -60,15 +60,29 @@ async function insertPedido(data) {
   if (!_VALID_ORIGENES.includes(data.origen))
     return { ok: false, error: 'Origen inválido' };
 
+  /* ── 7. delivery ── */
+  const esDelivery = data.es_delivery === true;
+  const direccionEntrega = esDelivery && data.direccion_entrega
+    ? String(data.direccion_entrega).replace(/[<>]/g, '').trim().slice(0, 150)
+    : null;
+  const referenciaEntrega = data.referencia_entrega
+    ? String(data.referencia_entrega).replace(/[<>]/g, '').trim().slice(0, 100)
+    : null;
+  if (esDelivery && !direccionEntrega)
+    return { ok: false, error: 'Dirección de entrega requerida para delivery' };
+
   /* ── INSERT (estado omitido — Supabase lo inicializa como 'pendiente') ── */
   try {
     const payload = {
-      cliente_nombre:   nombre,
-      cliente_telefono: telefono,
-      items:            data.items,
-      total:            data.total,
-      origen:           data.origen,
+      cliente_nombre:     nombre,
+      cliente_telefono:   telefono,
+      items:              data.items,
+      total:              data.total,
+      origen:             data.origen,
       comentario,
+      es_delivery:        esDelivery,
+      direccion_entrega:  direccionEntrega,
+      referencia_entrega: referenciaEntrega,
     };
     console.error('OBJETO A INSERTAR:', JSON.stringify(payload, null, 2));
     const { data: resData, error } = await db.from('pedidos').insert(payload);

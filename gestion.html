@@ -136,7 +136,7 @@
     .panel-main{padding-top:56px;padding-bottom:5rem}
 
     /* Stats */
-    .stats-bar{display:grid;grid-template-columns:repeat(4,1fr);background:var(--border);gap:1px;border-bottom:1px solid var(--border)}
+    .stats-bar{display:grid;grid-template-columns:repeat(5,1fr);background:var(--border);gap:1px;border-bottom:1px solid var(--border)}
     .stat-card{background:var(--bg-surface);padding:1.1rem 1.4rem;border-left:3px solid #C9A84C;transition:background-color .3s}
     .stat-lbl{font-size:9.5px;color:var(--text-3);letter-spacing:1px;text-transform:uppercase;margin-bottom:6px}
     .stat-val{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--text)}
@@ -185,6 +185,10 @@
     .b-web{background:#001030;color:#6090FF;border-color:#003080}
     .b-presencial{background:#1A0A00;color:#F08030;border-color:#5A3000}
     .b-whatsapp{background:#001A00;color:#25D366;border-color:#005A00}
+    .b-delivery{background:#001830;color:#38B6FF;border-color:#004A8A}
+    .o-delivery{font-size:12px;color:var(--text-2);margin-top:.65rem;display:flex;align-items:flex-start;gap:5px;line-height:1.4}
+    .o-delivery-ref{color:var(--text-4)}
+    .fpill-delivery.on{background:#004A8A;color:#fff;border-color:#38B6FF;box-shadow:0 0 12px rgba(56,182,255,.35)}
     .o-client{font-family:'Playfair Display',serif;font-size:16px;color:var(--text);flex:1;margin:0 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
 
     /* Card body */
@@ -209,22 +213,22 @@
     .spills{display:flex;gap:6px;flex-wrap:wrap}
 
     /* Status buttons — outline inactive, solid active */
-    .spill{font-size:12px;font-weight:700;padding:10px 18px;border-radius:8px;cursor:pointer;border:1.5px solid;min-width:110px;font-family:'Inter',sans-serif;transition:all .3s;text-align:center}
+    .spill{font-size:12px;font-weight:700;padding:10px 16px;border-radius:8px;cursor:pointer;border:1.5px solid;min-width:100px;font-family:'Inter',sans-serif;transition:all .3s;text-align:center}
     .spill:not(:disabled):not(.active):hover{transform:scale(1.05)}
     .sp-pendiente{background:transparent;color:#F08030;border-color:#5A3000}
-    .sp-pendiente.active{background:#E65100;color:#fff;border-color:#E65100;box-shadow:0 0 10px rgba(230,81,0,.35)}
+    .sp-pendiente.active{background:#E65100;color:#fff;border-color:#E65100;box-shadow:0 2px 8px rgba(230,81,0,.35)}
     .sp-pendiente:not(:disabled):not(.active):hover{background:rgba(230,81,0,.1);border-color:#E65100;color:#FF9050}
     .sp-preparando{background:transparent;color:#30A0F0;border-color:#005A8A}
-    .sp-preparando.active{background:#1565C0;color:#fff;border-color:#1565C0;box-shadow:0 0 10px rgba(21,101,192,.35)}
+    .sp-preparando.active{background:#1565C0;color:#fff;border-color:#1565C0;box-shadow:0 2px 8px rgba(21,101,192,.35)}
     .sp-preparando:not(:disabled):not(.active):hover{background:rgba(21,101,192,.1);border-color:#1565C0;color:#60C0FF}
     .sp-listo{background:transparent;color:#30C030;border-color:#005A00}
-    .sp-listo.active{background:#2E7D32;color:#fff;border-color:#2E7D32;box-shadow:0 0 10px rgba(46,125,50,.35)}
+    .sp-listo.active{background:#2E7D32;color:#fff;border-color:#2E7D32;box-shadow:0 2px 8px rgba(46,125,50,.35)}
     .sp-listo:not(:disabled):not(.active):hover{background:rgba(46,125,50,.1);border-color:#2E7D32;color:#50E050}
     .sp-entregado{background:transparent;color:#AA88CC;border-color:#4A1A6A}
-    .sp-entregado.active{background:#6A1B9A;color:#fff;border-color:#6A1B9A;box-shadow:0 0 10px rgba(106,27,154,.35)}
+    .sp-entregado.active{background:#6A1B9A;color:#fff;border-color:#6A1B9A;box-shadow:0 2px 8px rgba(106,27,154,.35)}
     .sp-entregado:not(:disabled):not(.active):hover{background:rgba(106,27,154,.1);border-color:#6A1B9A;color:#CC99FF}
     .sp-cancelado{background:transparent;color:#FF6B6B;border-color:#6A1A1A}
-    .sp-cancelado.active{background:#3A0A0A;color:#FF6B6B;border-color:#6A1A1A;box-shadow:0 0 10px rgba(192,57,43,.3)}
+    .sp-cancelado.active{background:#3A0A0A;color:#FF6B6B;border-color:#6A1A1A;box-shadow:0 2px 8px rgba(192,57,43,.3)}
     .sp-cancelado:not(:disabled):not(.active):hover{background:rgba(192,57,43,.1);border-color:#c0392b;color:#FF8888}
 
     /* Cancelled card */
@@ -299,12 +303,12 @@
     #modalOverlay.open,#modalOverlay.closing{display:flex}
     #modalOverlay.open .modal{animation:modalIn .25s cubic-bezier(.4,0,.2,1) both}
     #modalOverlay.closing .modal{animation:modalOut .25s cubic-bezier(.4,0,.2,1) both}
-    .modal{background:#FFFFFF;border:1px solid #EEEEEE;border-radius:14px;width:100%;max-width:520px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+    .modal{background:#FFFFFF;border:1px solid #EEEEEE;border-radius:14px;width:100%;max-width:800px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.2)}
     .modal-hdr{padding:1.1rem 1.3rem;border-bottom:1px solid #EEEEEE;display:flex;align-items:center;justify-content:space-between;background:#FFFFFF}
     .modal-ttl{font-family:'Playfair Display',serif;font-size:17px;color:#1A1A1A}
     .modal-x{background:transparent;border:1px solid #EEEEEE;color:#AAAAAA;width:28px;height:28px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .15s}
     .modal-x:hover{border-color:#C9A84C;color:#C9A84C}
-    .modal-body{padding:1.3rem;background:#FFFFFF;overflow-y:auto;max-height:68vh}
+    .modal-body{padding:1.3rem;background:#FFFFFF;overflow-y:auto;max-height:90vh}
     .sec-divider{display:flex;align-items:center;gap:12px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#BBBBBB;margin:1.1rem 0 .65rem}
     .sec-divider::before,.sec-divider::after{content:'';flex:1;height:1px;background:#EEEEEE}
     .sec-divider:first-child{margin-top:0}
@@ -324,15 +328,15 @@
     .origin-card input:checked + .origin-card-inner:hover{border-color:#C9A84C;background:#FFFBF0}
     .origin-card-icon{display:block;font-size:22px;margin-bottom:5px}
     .origin-card-label{font-size:12px;font-weight:600;color:#555}
-    .menu-prods-wrap{background:#FAFAFA;border:1px solid #EEEEEE;border-radius:8px;padding:0 12px;max-height:220px;overflow-y:auto}
-    .mcat-title{font-size:10px;font-weight:700;color:#C9A84C;text-transform:uppercase;letter-spacing:.6px;margin:1rem 0 .4rem;padding-top:.1rem}
-    .mcat-title:first-child{margin-top:.75rem}
-    .mprod{display:flex;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid #F0F0F0}
-    .mprod:last-child{border-bottom:none}
-    .mp-name{font-size:12.5px;color:#333}
-    .mp-price{font-size:11px;color:#AAAAAA;margin-top:1px}
-    .mp-add{background:transparent;border:1.5px solid #DDDDDD;color:#C9A84C;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0}
-    .mp-add:hover{background:#C9A84C;color:#fff;border-color:#C9A84C}
+    .menu-prods-wrap{background:#1A1A1A;border-radius:8px;overflow-y:auto;max-height:400px;padding:12px}
+    .mcat-title{font-size:10px;font-weight:700;color:#C9A84C;text-transform:uppercase;letter-spacing:.6px;padding:8px 4px 6px;margin:0}
+    .mcat-title:first-child{padding-top:4px}
+    .productos-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-bottom:6px}
+    .mprod{display:flex;align-items:center;gap:8px;background:#252525;border:1px solid #333;border-radius:6px;padding:8px 10px}
+    .mp-name{font-size:12px;color:#DDDDDD;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .mp-price{font-size:11px;font-weight:600;color:#C9A84C;white-space:nowrap;flex-shrink:0}
+    .mp-add{background:transparent;border:1.5px solid #C9A84C;color:#C9A84C;width:24px;height:24px;border-radius:50%;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;transition:all .15s;flex-shrink:0;padding:0;line-height:1}
+    .mp-add:hover{background:#C9A84C;color:#fff}
     .mc-item{display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid #F5F5F5}
     .mc-item:last-child{border-bottom:none}
     .mc-name{font-size:12px;color:#555;flex:1}
@@ -381,6 +385,7 @@
       .sv-card-val{font-size:20px}
       .sv-table th,.sv-table td{padding:8px 10px;font-size:11px}
       .sv-prod-total{display:none}
+      .productos-grid{grid-template-columns:1fr}
     }
 
     /* Notification permission banner */
@@ -510,6 +515,10 @@
         <div class="stat-lbl">Cancelados</div>
         <div class="stat-val" style="color:#FF6B6B" id="sCancelado">0</div>
       </div>
+      <div class="stat-card" style="border-left-color:#38B6FF">
+        <div class="stat-lbl">Delivery</div>
+        <div class="stat-val" style="color:#38B6FF" id="sDelivery">0</div>
+      </div>
     </div>
 
     <!-- Origin breakdown -->
@@ -530,6 +539,7 @@
         <button class="fpill fpill-listo" onclick="setFilter('listo',this)">Listo <span class="fpill-badge zero" id="badge-listo">0</span></button>
         <button class="fpill fpill-entregado" onclick="setFilter('entregado',this)">Entregado <span class="fpill-badge zero" id="badge-entregado">0</span></button>
         <button class="fpill fpill-cancelado" onclick="setFilter('cancelado',this)">Cancelado <span class="fpill-badge zero" id="badge-cancelado">0</span></button>
+        <button class="fpill fpill-delivery" onclick="setFilter('delivery',this)">🛵 Delivery <span class="fpill-badge zero" id="badge-delivery">0</span></button>
       </div>
       <input class="search-inp" type="search" placeholder="Buscar cliente..."
         oninput="setSearch(this.value)" aria-label="Buscar por nombre">
@@ -774,11 +784,7 @@ const MENU = [
     { name: 'Papas Fritas Grande',   price: 4000, icon: '🍟' },
     { name: 'Papas Fritas Familiar', price: 5000, icon: '🍟' },
   ]},
-  { cat: 'Pizzas', items: [
-    { name: 'Pizza Napolitana',  price: 5500, icon: '🍕' },
-    { name: 'Pizza Peperoni',    price: 6000, icon: '🍕' },
-    { name: 'Pizza Vegetariana', price: 5500, icon: '🍕' },
-  ]},
+
   { cat: 'Bebidas', items: [
     { name: 'Lata',               price: 1100, icon: '🥤' },
     { name: '1¼ litro',           price: 1700, icon: '🍾' },
@@ -1075,10 +1081,11 @@ function playNotification() {
 
 function updateStats() {
   const today = allOrders.filter(o => isToday(o.created_at));
-  document.getElementById('sTotal').textContent = today.length;
+  document.getElementById('sTotal').textContent    = today.length;
   document.getElementById('sPend').textContent      = today.filter(o => !o.estado || o.estado === 'pendiente').length;
   document.getElementById('sPrep').textContent      = today.filter(o => o.estado === 'preparando').length;
   document.getElementById('sCancelado').textContent = today.filter(o => o.estado === 'cancelado').length;
+  document.getElementById('sDelivery').textContent  = today.filter(o => o.es_delivery).length;
   document.getElementById('oWeb').textContent        = today.filter(o => !o.origen || o.origen === 'web').length;
   document.getElementById('oPresencial').textContent = today.filter(o => o.origen === 'presencial').length;
   document.getElementById('oWhatsapp').textContent   = today.filter(o => o.origen === 'whatsapp').length;
@@ -1093,6 +1100,7 @@ function updateFilterBadges() {
     listo:      allOrders.filter(o => o.estado === 'listo').length,
     entregado:  allOrders.filter(o => o.estado === 'entregado').length,
     cancelado:  allOrders.filter(o => o.estado === 'cancelado').length,
+    delivery:   allOrders.filter(o => o.es_delivery).length,
   };
   for (const [key, count] of Object.entries(counts)) {
     const el = document.getElementById('badge-' + key);
@@ -1106,9 +1114,11 @@ function getFiltered() {
   return allOrders.filter(o => {
     const stMatch = currentFilter === 'todos'
       ? true
-      : currentFilter === 'pendiente'
-        ? (!o.estado || o.estado === 'pendiente')
-        : o.estado === currentFilter;
+      : currentFilter === 'delivery'
+        ? o.es_delivery === true
+        : currentFilter === 'pendiente'
+          ? (!o.estado || o.estado === 'pendiente')
+          : o.estado === currentFilter;
     const srMatch = !searchQuery
       || (o.cliente_nombre || '').toLowerCase().includes(searchQuery.toLowerCase());
     return stMatch && srMatch;
@@ -1140,6 +1150,16 @@ function buildCard(o) {
     presencial: '<span class="badge b-presencial"><span class="badge-icon">🏪</span>Presencial</span>',
     whatsapp:   '<span class="badge b-whatsapp"><span class="badge-icon">💬</span>WhatsApp</span>',
   }[origen] || '<span class="badge b-web"><span class="badge-icon">🌐</span>Web</span>';
+
+  const deliveryBadge = o.es_delivery
+    ? '<span class="badge b-delivery"><span class="badge-icon">🛵</span>Delivery</span>'
+    : '';
+
+  const safeAddr = o.es_delivery && o.direccion_entrega ? escapeHtml(String(o.direccion_entrega)) : '';
+  const safeRef  = o.referencia_entrega ? escapeHtml(String(o.referencia_entrega)) : '';
+  const deliveryRow = safeAddr
+    ? `<div class="o-delivery">📍 ${safeAddr}${safeRef ? ` <span class="o-delivery-ref">· ${safeRef}</span>` : ''}</div>`
+    : '';
 
   const phoneRow = safePhone
     ? `<div class="o-phone"><i class="ti ti-phone" style="font-size:11px"></i>
@@ -1177,6 +1197,7 @@ function buildCard(o) {
         <span class="o-time">${escapeHtml(fmtTime(o.created_at))}</span>
         <span class="o-client">${safeName}</span>
         ${originBadge}
+        ${deliveryBadge}
         ${cancelBadge}
       </div>
       <div class="ocard-body">
@@ -1188,6 +1209,7 @@ function buildCard(o) {
           <span class="o-total-val">${escapeHtml(fmtPrice(o.total))}</span>
         </div>
         ${commentRow}
+        ${deliveryRow}
       </div>
       <div class="ocard-ftr">
         <div class="spills">${spillHtml}</div>
@@ -1270,15 +1292,15 @@ function setSearch(val) {
 function renderMenuProds() {
   document.getElementById('menuProds').innerHTML = MENU.map(cat => `
     <div class="mcat-title">${escapeHtml(cat.cat)}</div>
-    ${cat.items.map((p, idx) => `
-      <div class="mprod">
-        <div>
-          <div class="mp-name">${escapeHtml(p.name)}</div>
-          <div class="mp-price">${fmtPrice(p.price)}</div>
-        </div>
-        <button class="mp-add" data-cat="${escapeHtml(cat.cat)}" data-idx="${idx}"
-          onclick="addToCart(this)">+</button>
-      </div>`).join('')}
+    <div class="productos-grid">
+      ${cat.items.map((p, idx) => `
+        <div class="mprod">
+          <span class="mp-name">${escapeHtml(p.name)}</span>
+          <span class="mp-price">${fmtPrice(p.price)}</span>
+          <button class="mp-add" data-cat="${escapeHtml(cat.cat)}" data-idx="${idx}"
+            onclick="addToCart(this)">+</button>
+        </div>`).join('')}
+    </div>
   `).join('');
 }
 
