@@ -166,6 +166,10 @@ function clearCart() {
 /* ── CHECKOUT FLOW ── */
 function checkout() {
   if (!cart.length) return;
+  isDelivery = false;
+  document.getElementById('deliveryAddress').style.display   = 'none';
+  document.getElementById('deliverySwitch').style.background = '#DDD';
+  document.getElementById('deliverySwitchDot').style.transform = 'translateX(0)';
   const summaryEl = document.getElementById('checkoutItems');
   if (summaryEl) {
     summaryEl.innerHTML = cart.map(it => `
