@@ -92,8 +92,9 @@
     <div class="menu-tabs" id="menuTabs">
       <button class="mtab on"  onclick="scrollTocat('empanadas',this)">Empanadas</button>
       <button class="mtab"     onclick="scrollTocat('pastel',this)">Pastel de Choclo</button>
-      <button class="mtab"     onclick="scrollTocat('completos',this)">Completos</button>
+      <button class="mtab"     onclick="scrollTocat('vienesas',this)">Vienesas</button>
       <button class="mtab"     onclick="scrollTocat('churrascos',this)">Churrascos</button>
+      <button class="mtab"     onclick="scrollTocat('as',this)">AS</button>
       <button class="mtab"     onclick="scrollTocat('lomitos',this)">Lomitos</button>
       <button class="mtab"     onclick="scrollTocat('fajitas',this)">Fajitas</button>
       <button class="mtab"     onclick="scrollTocat('papas',this)">Papas</button>
@@ -365,47 +366,60 @@
       </div>
     </div>
 
-    <!-- ── COMPLETOS ── -->
-    <div class="cat-block" id="cat-completos">
-      <div class="cat-title">Completos</div>
+    <!-- ── VIENESAS ── -->
+    <div class="cat-block" id="cat-vienesas">
+      <div class="cat-title">Vienesas</div>
       <div class="cat-line"><div class="cat-line-bar"></div><span class="cat-line-sub">Hot dogs estilo chileno</span></div>
       <div class="items-list">
 
         <div class="mitem">
           <div class="mitem-emoji" style="background:url('img/completo.jpg') center/cover;font-size:0">&nbsp;</div>
           <div class="mitem-info">
-            <div class="mitem-name">Completo</div>
-            <div class="mitem-desc">Hot dog clásico con todos los ingredientes</div>
+            <div class="mitem-name">Vienesa Italiana Normal</div>
+            <div class="mitem-desc">Tomate, palta y mayo</div>
           </div>
           <div class="mitem-right">
             <span class="mitem-badge mb-g">Popular</span>
-            <span class="mitem-price">$3.500 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Completo',3500,'🌭','Completos')">+</button>
+            <span class="mitem-price">$2.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Vienesa Italiana Normal',2000,'🌭','Vienesas')">+</button>
           </div>
         </div>
 
         <div class="mitem">
           <div class="mitem-emoji" style="background:url('img/completo.jpg') center/cover;font-size:0">&nbsp;</div>
           <div class="mitem-info">
-            <div class="mitem-name">Completo Italiano</div>
-            <div class="mitem-desc">Con palta, tomate y mayonesa</div>
+            <div class="mitem-name">Vienesa Italiana XL</div>
+            <div class="mitem-desc">Tomate, palta y mayo</div>
           </div>
           <div class="mitem-right">
-            <span class="mitem-price">$4.500 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Completo Italiano',4500,'🌭','Completos')">+</button>
+            <span class="mitem-badge mb-w">XL</span>
+            <span class="mitem-price">$3.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Vienesa Italiana XL',3000,'🌭','Vienesas')">+</button>
           </div>
         </div>
 
         <div class="mitem">
           <div class="mitem-emoji" style="background:url('img/completo.jpg') center/cover;font-size:0">&nbsp;</div>
           <div class="mitem-info">
-            <div class="mitem-name">Completo Dinámico</div>
-            <div class="mitem-desc">Con ingredientes extras, más sabor en cada bocado</div>
+            <div class="mitem-name">Vienesa Completo Normal</div>
+            <div class="mitem-desc">Tomate, americana, chucrut y mayo</div>
           </div>
           <div class="mitem-right">
-            <span class="mitem-badge mb-w">Especial</span>
-            <span class="mitem-price">$5.000 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Completo Dinámico',5000,'🌭','Completos')">+</button>
+            <span class="mitem-price">$2.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Vienesa Completo Normal',2000,'🌭','Vienesas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/completo.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Vienesa Completo XL</div>
+            <div class="mitem-desc">Tomate, americana, chucrut y mayo</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-badge mb-w">XL</span>
+            <span class="mitem-price">$3.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Vienesa Completo XL',3000,'🌭','Vienesas')">+</button>
           </div>
         </div>
 
@@ -422,12 +436,25 @@
           <div class="mitem-emoji" style="background:url('img/churrasco.jpg') center/cover;font-size:0">&nbsp;</div>
           <div class="mitem-info">
             <div class="mitem-name">Churrasco Italiano</div>
-            <div class="mitem-desc">Carne fina con palta, tomate y mayo</div>
+            <div class="mitem-desc">Tomate, palta y mayo</div>
           </div>
           <div class="mitem-right">
             <span class="mitem-badge mb-g">Popular</span>
-            <span class="mitem-price">$5.500 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Churrasco Italiano',5500,'🥩','Churrascos')">+</button>
+            <span class="mitem-price">$3.900 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Churrasco Italiano',3900,'🥩','Churrascos')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/churrasco.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Churrasco Luco</div>
+            <div class="mitem-desc">Queso fundido</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-badge mb-w">Clásico</span>
+            <span class="mitem-price">$3.900 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Churrasco Luco',3900,'🥩','Churrascos')">+</button>
           </div>
         </div>
 
@@ -435,24 +462,70 @@
           <div class="mitem-emoji" style="background:url('img/churrasco.jpg') center/cover;font-size:0">&nbsp;</div>
           <div class="mitem-info">
             <div class="mitem-name">Churrasco Chacarero</div>
-            <div class="mitem-desc">Con porotos verdes, tomate y ají verde</div>
+            <div class="mitem-desc">Tomate, porotos verdes, ají y mayo</div>
           </div>
           <div class="mitem-right">
-            <span class="mitem-price">$5.500 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Churrasco Chacarero',5500,'🥩','Churrascos')">+</button>
+            <span class="mitem-price">$4.200 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Churrasco Chacarero',4200,'🥩','Churrascos')">+</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── AS ── -->
+    <div class="cat-block" id="cat-as">
+      <div class="cat-title">AS</div>
+      <div class="cat-line"><div class="cat-line-bar"></div><span class="cat-line-sub">Sándwiches especiales</span></div>
+      <div class="items-list">
+
+        <div class="mitem">
+          <div class="mitem-emoji">🥪</div>
+          <div class="mitem-info">
+            <div class="mitem-name">AS Italiano Normal</div>
+            <div class="mitem-desc">Palta y mayo</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-price">$3.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('AS Italiano Normal',3000,'🥪','AS')">+</button>
           </div>
         </div>
 
         <div class="mitem">
-          <div class="mitem-emoji" style="background:url('img/churrasco.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-emoji">🥪</div>
           <div class="mitem-info">
-            <div class="mitem-name">Barros Luco</div>
-            <div class="mitem-desc">Carne de vacuno y queso derretido</div>
+            <div class="mitem-name">AS Italiano XL</div>
+            <div class="mitem-desc">Palta y mayo</div>
           </div>
           <div class="mitem-right">
-            <span class="mitem-badge mb-w">Clásico</span>
-            <span class="mitem-price">$5.000 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Barros Luco',5000,'🥩','Churrascos')">+</button>
+            <span class="mitem-badge mb-w">XL</span>
+            <span class="mitem-price">$4.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('AS Italiano XL',4000,'🥪','AS')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji">🥪</div>
+          <div class="mitem-info">
+            <div class="mitem-name">AS Brasil Normal</div>
+            <div class="mitem-desc">Palta, queso fundido y mayo</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-price">$3.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('AS Brasil Normal',3000,'🥪','AS')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji">🥪</div>
+          <div class="mitem-info">
+            <div class="mitem-name">AS Brasil XL</div>
+            <div class="mitem-desc">Palta, queso fundido y mayo</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-badge mb-w">XL</span>
+            <span class="mitem-price">$4.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('AS Brasil XL',4000,'🥪','AS')">+</button>
           </div>
         </div>
 
@@ -469,12 +542,24 @@
           <div class="mitem-emoji" style="background:url('img/churrasco.jpg') center/cover;font-size:0">&nbsp;</div>
           <div class="mitem-info">
             <div class="mitem-name">Lomito Italiano</div>
-            <div class="mitem-desc">Cerdo con palta, tomate y mayonesa</div>
+            <div class="mitem-desc">Tomate, palta y mayo</div>
           </div>
           <div class="mitem-right">
             <span class="mitem-badge mb-g">Popular</span>
-            <span class="mitem-price">$6.000 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Lomito Italiano',6000,'🥪','Lomitos')">+</button>
+            <span class="mitem-price">$3.800 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Lomito Italiano',3800,'🥪','Lomitos')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji" style="background:url('img/churrasco.jpg') center/cover;font-size:0">&nbsp;</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Lomito Luco</div>
+            <div class="mitem-desc">Queso fundido</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-price">$3.800 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Lomito Luco',3800,'🥪','Lomitos')">+</button>
           </div>
         </div>
 
@@ -482,11 +567,11 @@
           <div class="mitem-emoji" style="background:url('img/churrasco.jpg') center/cover;font-size:0">&nbsp;</div>
           <div class="mitem-info">
             <div class="mitem-name">Lomito Chacarero</div>
-            <div class="mitem-desc">Con porotos verdes, tomate y ají verde</div>
+            <div class="mitem-desc">Tomate, porotos verdes, ají y mayonesa</div>
           </div>
           <div class="mitem-right">
-            <span class="mitem-price">$6.000 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Lomito Chacarero',6000,'🥪','Lomitos')">+</button>
+            <span class="mitem-price">$3.800 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Lomito Chacarero',3800,'🥪','Lomitos')">+</button>
           </div>
         </div>
 
@@ -502,24 +587,36 @@
         <div class="mitem">
           <div class="mitem-emoji">🌮</div>
           <div class="mitem-info">
-            <div class="mitem-name">Fajita de Carne</div>
-            <div class="mitem-desc">Tiras de vacuno con verduras y especias</div>
+            <div class="mitem-name">Fajita de Pollo</div>
+            <div class="mitem-desc">Tiras de pollo con pimentón y cebolla</div>
           </div>
           <div class="mitem-right">
-            <span class="mitem-price">$6.500 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Fajita de Carne',6500,'🌮','Fajitas')">+</button>
+            <span class="mitem-price">$3.500 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Fajita de Pollo',3500,'🌮','Fajitas')">+</button>
           </div>
         </div>
 
         <div class="mitem">
           <div class="mitem-emoji">🌮</div>
           <div class="mitem-info">
-            <div class="mitem-name">Fajita de Pollo</div>
-            <div class="mitem-desc">Tiras de pollo con pimentón y cebolla</div>
+            <div class="mitem-name">Fajita de Carne</div>
+            <div class="mitem-desc">Tiras de vacuno con verduras y especias</div>
           </div>
           <div class="mitem-right">
-            <span class="mitem-price">$6.000 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Fajita de Pollo',6000,'🌮','Fajitas')">+</button>
+            <span class="mitem-price">$3.500 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Fajita de Carne',3500,'🌮','Fajitas')">+</button>
+          </div>
+        </div>
+
+        <div class="mitem">
+          <div class="mitem-emoji">🍄</div>
+          <div class="mitem-info">
+            <div class="mitem-name">Fajita Champiñón</div>
+            <div class="mitem-desc">Champiñones salteados en tortilla caliente</div>
+          </div>
+          <div class="mitem-right">
+            <span class="mitem-price">$3.500 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Fajita Champiñón',3500,'🍄','Fajitas')">+</button>
           </div>
         </div>
 
@@ -531,8 +628,8 @@
           </div>
           <div class="mitem-right">
             <span class="mitem-badge mb-w">Mixta</span>
-            <span class="mitem-price">$7.000 <small>CLP</small></span>
-            <button class="mitem-add" onclick="add('Fajita Mixta',7000,'🌮','Fajitas')">+</button>
+            <span class="mitem-price">$4.000 <small>CLP</small></span>
+            <button class="mitem-add" onclick="add('Fajita Mixta',4000,'🌮','Fajitas')">+</button>
           </div>
         </div>
 

@@ -242,8 +242,9 @@
   <div class="tabs-scroll">
     <button class="ctab active" data-target="empanadas" onclick="goToSection('empanadas',this)">Empanadas</button>
     <button class="ctab" data-target="pastel"     onclick="goToSection('pastel',this)">Pastel de Choclo</button>
-    <button class="ctab" data-target="completos"  onclick="goToSection('completos',this)">Completos</button>
+    <button class="ctab" data-target="vienesas"   onclick="goToSection('vienesas',this)">Vienesas</button>
     <button class="ctab" data-target="churrascos" onclick="goToSection('churrascos',this)">Churrascos</button>
+    <button class="ctab" data-target="as"         onclick="goToSection('as',this)">AS</button>
     <button class="ctab" data-target="lomitos"    onclick="goToSection('lomitos',this)">Lomitos</button>
     <button class="ctab" data-target="fajitas"    onclick="goToSection('fajitas',this)">Fajitas</button>
     <button class="ctab" data-target="papas"      onclick="goToSection('papas',this)">Papas</button>
@@ -301,21 +302,28 @@
   </section>
   <div class="section-sep"></div>
 
-  <!-- ── COMPLETOS ── -->
-  <section class="carta-section" id="completos">
+  <!-- ── VIENESAS ── -->
+  <section class="carta-section" id="vienesas">
     <div class="cat-hdr">
-      <h2 class="cat-title">Completos</h2>
+      <h2 class="cat-title">Vienesas</h2>
       <div class="cat-line"></div>
     </div>
     <div class="cat-items">
-      <div class="citem-wrap"><div class="citem"><span class="citem-name">Completo</span><span class="citem-dots"></span><span class="citem-price">$3.500</span></div></div>
       <div class="citem-wrap">
-        <div class="citem"><span class="citem-name">Completo Italiano</span><span class="citem-dots"></span><span class="citem-price">$4.500</span></div>
-        <div class="citem-desc">Palta, tomate y mayo</div>
+        <div class="citem"><span class="citem-name">Vienesa Italiana Normal</span><span class="citem-dots"></span><span class="citem-price">$2.000</span></div>
+        <div class="citem-desc">Tomate, palta y mayo</div>
       </div>
       <div class="citem-wrap">
-        <div class="citem"><span class="citem-name">Completo Dinámico</span><span class="citem-dots"></span><span class="citem-price">$5.000</span></div>
-        <div class="citem-desc">Con todo: palta, tomate, mayo, sauerkraut</div>
+        <div class="citem"><span class="citem-name">Vienesa Italiana XL</span><span class="citem-dots"></span><span class="citem-price">$3.000</span></div>
+        <div class="citem-desc">Tomate, palta y mayo</div>
+      </div>
+      <div class="citem-wrap">
+        <div class="citem"><span class="citem-name">Vienesa Completo Normal</span><span class="citem-dots"></span><span class="citem-price">$2.000</span></div>
+        <div class="citem-desc">Tomate, americana, chucrut y mayo</div>
+      </div>
+      <div class="citem-wrap">
+        <div class="citem"><span class="citem-name">Vienesa Completo XL</span><span class="citem-dots"></span><span class="citem-price">$3.000</span></div>
+        <div class="citem-desc">Tomate, americana, chucrut y mayo</div>
       </div>
     </div>
   </section>
@@ -329,16 +337,44 @@
     </div>
     <div class="cat-items">
       <div class="citem-wrap">
-        <div class="citem"><span class="citem-name">Churrasco Italiano</span><span class="citem-dots"></span><span class="citem-price">$5.500</span></div>
-        <div class="citem-desc">Palta, tomate y mayo</div>
+        <div class="citem"><span class="citem-name">Churrasco Italiano</span><span class="citem-dots"></span><span class="citem-price">$3.900</span></div>
+        <div class="citem-desc">Tomate, palta y mayo</div>
       </div>
       <div class="citem-wrap">
-        <div class="citem"><span class="citem-name">Churrasco Chacarero</span><span class="citem-dots"></span><span class="citem-price">$5.500</span></div>
-        <div class="citem-desc">Porotos verdes, tomate y ají verde</div>
+        <div class="citem"><span class="citem-name">Churrasco Luco</span><span class="citem-dots"></span><span class="citem-price">$3.900</span></div>
+        <div class="citem-desc">Queso fundido</div>
       </div>
       <div class="citem-wrap">
-        <div class="citem"><span class="citem-name">Barros Luco</span><span class="citem-dots"></span><span class="citem-price">$5.000</span></div>
-        <div class="citem-desc">Churrasco con queso derretido</div>
+        <div class="citem"><span class="citem-name">Churrasco Chacarero</span><span class="citem-dots"></span><span class="citem-price">$4.200</span></div>
+        <div class="citem-desc">Tomate, porotos verdes, ají y mayo</div>
+      </div>
+    </div>
+  </section>
+  <div class="section-sep"></div>
+
+  <!-- ── AS ── -->
+  <section class="carta-section" id="as">
+    <div class="cat-hdr">
+      <h2 class="cat-title">AS</h2>
+      <div class="cat-line"></div>
+      <div class="cat-subtitle">Sándwiches especiales</div>
+    </div>
+    <div class="cat-items">
+      <div class="citem-wrap">
+        <div class="citem"><span class="citem-name">AS Italiano Normal</span><span class="citem-dots"></span><span class="citem-price">$3.000</span></div>
+        <div class="citem-desc">Palta y mayo</div>
+      </div>
+      <div class="citem-wrap">
+        <div class="citem"><span class="citem-name">AS Italiano XL</span><span class="citem-dots"></span><span class="citem-price">$4.000</span></div>
+        <div class="citem-desc">Palta y mayo</div>
+      </div>
+      <div class="citem-wrap">
+        <div class="citem"><span class="citem-name">AS Brasil Normal</span><span class="citem-dots"></span><span class="citem-price">$3.000</span></div>
+        <div class="citem-desc">Palta, queso fundido y mayo</div>
+      </div>
+      <div class="citem-wrap">
+        <div class="citem"><span class="citem-name">AS Brasil XL</span><span class="citem-dots"></span><span class="citem-price">$4.000</span></div>
+        <div class="citem-desc">Palta, queso fundido y mayo</div>
       </div>
     </div>
   </section>
@@ -352,12 +388,16 @@
     </div>
     <div class="cat-items">
       <div class="citem-wrap">
-        <div class="citem"><span class="citem-name">Lomito Italiano</span><span class="citem-dots"></span><span class="citem-price">$6.000</span></div>
-        <div class="citem-desc">Palta, tomate y mayo</div>
+        <div class="citem"><span class="citem-name">Lomito Italiano</span><span class="citem-dots"></span><span class="citem-price">$3.800</span></div>
+        <div class="citem-desc">Tomate, palta y mayo</div>
       </div>
       <div class="citem-wrap">
-        <div class="citem"><span class="citem-name">Lomito Chacarero</span><span class="citem-dots"></span><span class="citem-price">$6.000</span></div>
-        <div class="citem-desc">Porotos verdes, tomate y ají verde</div>
+        <div class="citem"><span class="citem-name">Lomito Luco</span><span class="citem-dots"></span><span class="citem-price">$3.800</span></div>
+        <div class="citem-desc">Queso fundido</div>
+      </div>
+      <div class="citem-wrap">
+        <div class="citem"><span class="citem-name">Lomito Chacarero</span><span class="citem-dots"></span><span class="citem-price">$3.800</span></div>
+        <div class="citem-desc">Tomate, porotos verdes, ají y mayonesa</div>
       </div>
     </div>
   </section>
@@ -371,9 +411,10 @@
       <div class="cat-subtitle">Servidas con tortilla, verduras salteadas y crema</div>
     </div>
     <div class="cat-items">
-      <div class="citem-wrap"><div class="citem"><span class="citem-name">Fajita de Carne</span><span class="citem-dots"></span><span class="citem-price">$6.500</span></div></div>
-      <div class="citem-wrap"><div class="citem"><span class="citem-name">Fajita de Pollo</span><span class="citem-dots"></span><span class="citem-price">$6.000</span></div></div>
-      <div class="citem-wrap"><div class="citem"><span class="citem-name">Fajita Mixta</span><span class="citem-dots"></span><span class="citem-price">$7.000</span></div></div>
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Fajita de Pollo</span><span class="citem-dots"></span><span class="citem-price">$3.500</span></div></div>
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Fajita de Carne</span><span class="citem-dots"></span><span class="citem-price">$3.500</span></div></div>
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Fajita Champiñón</span><span class="citem-dots"></span><span class="citem-price">$3.500</span></div></div>
+      <div class="citem-wrap"><div class="citem"><span class="citem-name">Fajita Mixta</span><span class="citem-dots"></span><span class="citem-price">$4.000</span></div></div>
     </div>
   </section>
   <div class="section-sep"></div>
