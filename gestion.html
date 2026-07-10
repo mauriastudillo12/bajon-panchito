@@ -179,7 +179,7 @@
 
     /* Card header */
     .ocard-hdr{background:var(--bg-surface2);border-bottom:1px solid var(--border);padding:12px 18px;display:flex;align-items:center;gap:8px;transition:background-color .3s}
-    .o-time{font-size:11px;font-weight:600;color:var(--text-2);font-variant-numeric:tabular-nums;white-space:nowrap}
+    .o-time{font-size:11px;color:#888;background:#1A1A1A;padding:3px 8px;border-radius:4px;font-variant-numeric:tabular-nums;white-space:nowrap;flex-shrink:0}
     .badge{display:inline-flex;align-items:center;font-size:12px;font-weight:700;letter-spacing:.5px;padding:6px 14px;border-radius:20px;border:1px solid transparent;white-space:nowrap;flex-shrink:0}
     .badge-icon{font-size:14px;margin-right:6px;vertical-align:-2px;line-height:1}
     .b-web{background:#001030;color:#6090FF;border-color:#003080}
@@ -402,6 +402,21 @@
     [data-theme="light"] .nbanner-btn:hover{background:#9A7A08}
     [data-theme="light"] .nbanner-dismiss{border-color:#CCC;color:#888}
 
+    /* Banner de nuevo pedido */
+    #pedidoBanner{
+      position:fixed;top:0;left:0;right:0;z-index:9999;
+      display:flex;align-items:center;justify-content:center;gap:10px;
+      background:#C9A84C;color:#000;
+      font-family:'Inter',sans-serif;font-size:14px;font-weight:700;
+      padding:14px 20px;box-shadow:0 4px 20px rgba(0,0,0,.25);
+      transform:translateY(-100%);
+    }
+    #pedidoBanner .pb-icon{font-size:17px}
+    #pedidoBanner.pb-show{animation:pbSlideDown .35s ease forwards}
+    #pedidoBanner.pb-hide{animation:pbSlideUp .35s ease forwards}
+    @keyframes pbSlideDown{from{transform:translateY(-100%)}to{transform:translateY(0)}}
+    @keyframes pbSlideUp{from{transform:translateY(0)}to{transform:translateY(-100%)}}
+
     /* Edit button */
     .o-edit{background:transparent;border:1.5px solid var(--border-input);color:var(--text-2);font-size:12px;font-weight:600;padding:10px 14px;border-radius:6px;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:5px;transition:all .15s;white-space:nowrap}
     .o-edit:hover{background:var(--bg-surface2);color:var(--text);border-color:var(--text-3)}
@@ -435,6 +450,11 @@
   </style>
 </head>
 <body>
+
+<div id="pedidoBanner" role="status" aria-live="polite">
+  <span class="pb-icon">🛍️</span>
+  <span class="pb-text"></span>
+</div>
 
 <!-- ══════════════════════════
      LOGIN VIEW
@@ -834,7 +854,23 @@ function fmtPrice(n) {
 }
 
 function fmtTime(dateStr) {
-  return new Date(dateStr).toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit' });
+  const d = new Date(dateStr);
+  const hora = d.toLocaleTimeString('es-CL', {
+    hour: '2-digit',
+    minute: '2-digit',
+    timeZone: 'America/Santiago',
+  });
+  if (isToday(dateStr)) return hora;
+
+  const ayer = new Date();
+  ayer.setDate(ayer.getDate() - 1);
+  const esAyer = d.getFullYear() === ayer.getFullYear()
+    && d.getMonth()    === ayer.getMonth()
+    && d.getDate()     === ayer.getDate();
+  if (esAyer) return `Ayer ${hora}`;
+
+  const dias = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+  return `${dias[d.getDay()]} ${hora}`;
 }
 
 function validatePhone(str) {
@@ -931,7 +967,7 @@ function iniciarParpadeoTitulo() {
   if (_titleBlink || !document.hidden) return;
   let on = true;
   _titleBlink = setInterval(() => {
-    document.title = on ? '🔴 Nuevo pedido!' : _titleOrig;
+    document.title = on ? '🔴 NUEVO PEDIDO' : _titleOrig;
     on = !on;
   }, 1000);
 }
@@ -959,6 +995,19 @@ function dispararNotifPush(pedido) {
 
 function mostrarBannerNotif() {
   document.getElementById('notifBanner').classList.add('shown');
+}
+
+let _pedidoBannerTimer = null;
+function mostrarBannerPedido(pedido) {
+  const el = document.getElementById('pedidoBanner');
+  el.querySelector('.pb-text').textContent = `¡Nuevo pedido! — ${pedido.cliente_nombre || 'Cliente'}`;
+  el.classList.remove('pb-hide');
+  el.classList.add('pb-show');
+  clearTimeout(_pedidoBannerTimer);
+  _pedidoBannerTimer = setTimeout(() => {
+    el.classList.remove('pb-show');
+    el.classList.add('pb-hide');
+  }, 5000);
 }
 
 function cerrarBanner() {
@@ -1052,7 +1101,8 @@ function subscribeRealtime() {
         allOrders.unshift(payload.new);
         updateStats();
         prependCard(payload.new);
-        playNotification();
+        sonarNotificacion();
+        mostrarBannerPedido(payload.new);
         dispararNotifPush(payload.new);
       })
     .subscribe((status) => {
@@ -1073,20 +1123,19 @@ function prependCard(o) {
   card.addEventListener('mouseenter', () => card.classList.remove('pedido-nuevo'), { once: true });
 }
 
-function playNotification() {
+function sonarNotificacion() {
   try {
     const ctx = new (window.AudioContext || window.webkitAudioContext)();
-    [880, 1100].forEach((freq, i) => {
-      const osc  = ctx.createOscillator();
+    [0, 0.15, 0.3].forEach(delay => {
+      const osc = ctx.createOscillator();
       const gain = ctx.createGain();
       osc.connect(gain);
       gain.connect(ctx.destination);
-      osc.frequency.value = freq;
-      osc.type = 'sine';
-      gain.gain.setValueAtTime(0.3, ctx.currentTime + i * 0.15);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.15 + 0.2);
-      osc.start(ctx.currentTime + i * 0.15);
-      osc.stop(ctx.currentTime + i * 0.15 + 0.2);
+      osc.frequency.value = 880;
+      gain.gain.setValueAtTime(0.4, ctx.currentTime + delay);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + delay + 0.12);
+      osc.start(ctx.currentTime + delay);
+      osc.stop(ctx.currentTime + delay + 0.12);
     });
   } catch (e) { /* AudioContext not available — silent fallback */ }
 }
@@ -1206,9 +1255,9 @@ function buildCard(o) {
   return `
     <div class="ocard${estado === 'cancelado' ? ' ocard-cancelado' : ''}" id="card-${sid}">
       <div class="ocard-hdr">
-        <span class="o-time">${escapeHtml(fmtTime(o.created_at))}</span>
         <span class="o-client">${safeName}</span>
         ${originBadge}
+        <span class="o-time">${escapeHtml(fmtTime(o.created_at))}</span>
         ${deliveryBadge}
         ${cancelBadge}
       </div>
