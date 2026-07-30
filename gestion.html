@@ -431,20 +431,26 @@
       body > *{display:none !important}
       #ticketImpresion{display:block !important}
       #ticketImpresion{
-        width:80mm;
+        width:48mm;
+        max-width:48mm;
         font-family:'Courier New',monospace;
-        font-size:12px;
+        font-size:9px;
+        line-height:1.4;
         color:#000;
         background:#fff;
-        padding:8px;
-        line-height:1.6;
-      }
-      #ticketImpresion pre{
-        font-family:'Courier New',monospace;
-        font-size:12px;
-        white-space:pre-wrap;
-        word-break:break-word;
+        padding:2mm;
         margin:0;
+      }
+      #ticketImpresion .tk-title{font-size:11px;font-weight:bold;text-align:center}
+      #ticketImpresion .tk-line{text-align:center;white-space:pre}
+      #ticketImpresion .tk-meta{font-size:9px;text-align:center}
+      #ticketImpresion .tk-item-name{font-size:9px;text-align:left}
+      #ticketImpresion .tk-item-price{font-size:9px;text-align:right}
+      #ticketImpresion .tk-nota{font-size:9px;text-align:center}
+      #ticketImpresion .tk-total{font-size:11px;font-weight:bold;text-align:center}
+      @page{
+        size:58mm auto;
+        margin:2mm;
       }
     }
   </style>
@@ -1881,40 +1887,36 @@ function imprimirPedido(id) {
   const o = allOrders.find(x => String(x.id) === String(id));
   if (!o) return;
 
-  const W    = 32;
-  const LINE = '-'.repeat(W);
-
-  function center(str) {
-    str = String(str);
-    if (str.length >= W) return str;
-    const pad = W - str.length;
-    return ' '.repeat(Math.floor(pad / 2)) + str;
-  }
+  const LINE = '-'.repeat(32);
 
   const hora = (o.created_at ? new Date(o.created_at) : new Date())
     .toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit' });
 
-  const itemLines = Array.isArray(o.items)
-    ? o.items.map(i => escapeHtml(`${i.cantidad || 1}x ${String(i.nombre || '')}`)).join('\n')
-    : '(sin productos)';
+  const itemsHtml = Array.isArray(o.items) && o.items.length
+    ? o.items.map(i => {
+        const nombre = escapeHtml(`${i.cantidad || 1}x ${String(i.nombre || '')}`);
+        const precio = escapeHtml(fmtPrice((i.precio || 0) * (i.cantidad || 0)));
+        return `<div class="tk-item-name">${nombre}</div><div class="tk-item-price">${precio}</div>`;
+      }).join('')
+    : '<div class="tk-item-name">(sin productos)</div>';
 
   const phoneLine = o.cliente_telefono
-    ? `\nTELEFONO: ${escapeHtml(String(o.cliente_telefono))}` : '';
+    ? `<div class="tk-meta">TELEFONO: ${escapeHtml(String(o.cliente_telefono))}</div>` : '';
 
   const notaLine = o.comentario
-    ? `\nNOTA: ${escapeHtml(String(o.comentario))}\n` : '';
+    ? `<div class="tk-nota">NOTA: ${escapeHtml(String(o.comentario))}</div>` : '';
 
   const ticket = document.getElementById('ticketImpresion');
-  ticket.innerHTML = `<pre>${center('EL BAJÓN DE PANCHITO')}
-${LINE}
-${hora}
-
-CLIENTE: ${escapeHtml(o.cliente_nombre || '')}${phoneLine}
-
-${LINE}
-${itemLines}
-${notaLine}${LINE}
-<b>TOTAL: ${escapeHtml(fmtPrice(o.total || 0))}</b></pre>`;
+  ticket.innerHTML = `<div class="tk-title">EL BAJÓN DE PANCHITO</div>
+<div class="tk-line">${LINE}</div>
+<div class="tk-meta">${hora}</div>
+<div class="tk-meta">CLIENTE: ${escapeHtml(o.cliente_nombre || '')}</div>
+${phoneLine}
+<div class="tk-line">${LINE}</div>
+${itemsHtml}
+${notaLine}
+<div class="tk-line">${LINE}</div>
+<div class="tk-total">TOTAL: ${escapeHtml(fmtPrice(o.total || 0))}</div>`;
 
   window.onafterprint = () => {
     ticket.innerHTML = '';
