@@ -425,32 +425,50 @@
     .o-print{background:transparent;border:1.5px solid var(--border-input);color:var(--text-3);font-size:12px;font-weight:600;padding:10px 14px;border-radius:6px;cursor:pointer;font-family:'Inter',sans-serif;display:flex;align-items:center;gap:5px;transition:all .15s;white-space:nowrap}
     .o-print:hover{background:#FFFFFF;color:#111111;border-color:#CCCCCC}
 
+    /* Print tip */
+    .print-tip{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--text-3);background:var(--bg-surface2);border:1px solid var(--border);border-radius:6px;padding:8px 12px;margin:0 0 12px}
+    .print-tip b{color:var(--text-2)}
+
     /* Ticket de impresión */
     #ticketImpresion{display:none}
     @media print{
       body > *{display:none !important}
       #ticketImpresion{display:block !important}
+      html, body{
+        margin:0 !important;
+        padding:0 !important;
+        height:auto !important;
+      }
       #ticketImpresion{
         width:72mm;
         max-width:72mm;
         font-family:'Courier New',monospace;
-        font-size:10px;
+        font-size:12px;
         line-height:1.4;
         color:#000;
         background:#fff;
-        padding:3mm;
+        padding:3mm 3mm 8mm 3mm;
         margin:0;
+        display:block;
+        overflow:hidden;
       }
-      #ticketImpresion .tk-title{font-size:11px;font-weight:bold;text-align:center}
+      #ticketImpresion .tk-title{font-size:14px;font-weight:bold;text-align:center}
       #ticketImpresion .tk-line{text-align:center;white-space:pre}
       #ticketImpresion .tk-meta{font-size:9px;text-align:center}
-      #ticketImpresion .tk-item-name{font-size:9px;text-align:left}
-      #ticketImpresion .tk-item-price{font-size:9px;text-align:right}
-      #ticketImpresion .tk-nota{font-size:9px;text-align:center}
-      #ticketImpresion .tk-total{font-size:11px;font-weight:bold;text-align:center}
+      #ticketImpresion .tk-time{font-size:11px;font-weight:bold;text-align:center}
+      #ticketImpresion .tk-cliente{text-align:center}
+      #ticketImpresion .tk-cliente-label{font-size:12px;font-weight:bold}
+      #ticketImpresion .tk-cliente-name{font-size:13px;font-weight:bold}
+      #ticketImpresion .tk-item-name{font-size:12px;font-weight:bold;text-align:left}
+      #ticketImpresion .tk-item-price{font-size:11px;font-weight:normal;text-align:right}
+      #ticketImpresion .tk-nota{font-size:11px;font-weight:normal;font-style:italic;text-align:center}
+      #ticketImpresion .tk-total{font-size:14px;font-weight:bold;text-align:center}
+      #ticketImpresion .tk-total-amount{font-size:16px;font-weight:bold}
       @page{
         size:80mm auto;
-        margin:3mm;
+        margin:0;
+        margin-top:0;
+        margin-bottom:0;
       }
     }
   </style>
@@ -569,6 +587,11 @@
       </div>
       <input class="search-inp" type="search" placeholder="Buscar cliente..."
         oninput="setSearch(this.value)" aria-label="Buscar por nombre">
+    </div>
+
+    <!-- Print tip -->
+    <div class="print-tip">
+      🖨️ Al imprimir en Chrome: en el diálogo de impresión abre <b>"Más opciones"</b> y desactiva <b>"Encabezados y pies de página"</b> para que no salgan la fecha ni el título en el ticket.
     </div>
 
     <!-- Orders -->
@@ -1906,17 +1929,25 @@ function imprimirPedido(id) {
   const notaLine = o.comentario
     ? `<div class="tk-nota">NOTA: ${escapeHtml(String(o.comentario))}</div>` : '';
 
-  const ticket = document.getElementById('ticketImpresion');
-  ticket.innerHTML = `<div class="tk-title">EL BAJÓN DE PANCHITO</div>
+  let ticketHTML = `<div class="tk-title">EL BAJÓN DE PANCHITO</div>
 <div class="tk-line">${LINE}</div>
-<div class="tk-meta">${hora}</div>
-<div class="tk-meta">CLIENTE: ${escapeHtml(o.cliente_nombre || '')}</div>
+<div class="tk-time">${hora}</div>
+<div class="tk-cliente"><span class="tk-cliente-label">CLIENTE:</span> <span class="tk-cliente-name">${escapeHtml(o.cliente_nombre || '')}</span></div>
 ${phoneLine}
 <div class="tk-line">${LINE}</div>
 ${itemsHtml}
 ${notaLine}
 <div class="tk-line">${LINE}</div>
-<div class="tk-total">TOTAL: ${escapeHtml(fmtPrice(o.total || 0))}</div>`;
+<div class="tk-total"><span>TOTAL:</span> <span class="tk-total-amount">${escapeHtml(fmtPrice(o.total || 0))}</span></div>`;
+
+  // Espacio de corte al final
+  ticketHTML += `
+    <div style="margin-top:8mm;font-size:8px;text-align:center;color:#fff;">.</div>
+    <div style="margin-top:2mm"></div>
+  `;
+
+  const ticket = document.getElementById('ticketImpresion');
+  ticket.innerHTML = ticketHTML;
 
   window.onafterprint = () => {
     ticket.innerHTML = '';
