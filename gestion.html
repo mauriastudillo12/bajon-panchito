@@ -447,10 +447,14 @@
         line-height:1.4;
         color:#000;
         background:#fff;
-        padding:3mm 3mm 8mm 3mm;
+        padding:3mm 3mm 0 3mm;
         margin:0;
         display:block;
         overflow:hidden;
+      }
+      #ticketImpresion > *:last-child{
+        margin-bottom:0 !important;
+        padding-bottom:0 !important;
       }
       #ticketImpresion .tk-title{font-size:14px;font-weight:bold;text-align:center}
       #ticketImpresion .tk-line{text-align:center;white-space:pre}
@@ -1939,12 +1943,6 @@ ${itemsHtml}
 ${notaLine}
 <div class="tk-line">${LINE}</div>
 <div class="tk-total"><span>TOTAL:</span> <span class="tk-total-amount">${escapeHtml(fmtPrice(o.total || 0))}</span></div>`;
-
-  // Espacio de corte al final
-  ticketHTML += `
-    <div style="margin-top:8mm;font-size:8px;text-align:center;color:#fff;">.</div>
-    <div style="margin-top:2mm"></div>
-  `;
 
   const ticket = document.getElementById('ticketImpresion');
   ticket.innerHTML = ticketHTML;
