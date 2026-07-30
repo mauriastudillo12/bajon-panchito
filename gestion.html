@@ -431,14 +431,14 @@
       body > *{display:none !important}
       #ticketImpresion{display:block !important}
       #ticketImpresion{
-        width:48mm;
-        max-width:48mm;
+        width:72mm;
+        max-width:72mm;
         font-family:'Courier New',monospace;
-        font-size:9px;
+        font-size:10px;
         line-height:1.4;
         color:#000;
         background:#fff;
-        padding:2mm;
+        padding:3mm;
         margin:0;
       }
       #ticketImpresion .tk-title{font-size:11px;font-weight:bold;text-align:center}
@@ -449,8 +449,8 @@
       #ticketImpresion .tk-nota{font-size:9px;text-align:center}
       #ticketImpresion .tk-total{font-size:11px;font-weight:bold;text-align:center}
       @page{
-        size:58mm auto;
-        margin:2mm;
+        size:80mm auto;
+        margin:3mm;
       }
     }
   </style>
@@ -1887,7 +1887,7 @@ function imprimirPedido(id) {
   const o = allOrders.find(x => String(x.id) === String(id));
   if (!o) return;
 
-  const LINE = '-'.repeat(32);
+  const LINE = '-'.repeat(40);
 
   const hora = (o.created_at ? new Date(o.created_at) : new Date())
     .toLocaleTimeString('es-CL', { hour: '2-digit', minute: '2-digit' });
