@@ -432,25 +432,31 @@
     /* Ticket de impresión */
     #ticketImpresion{display:none}
     @media print{
-      body > *{display:none !important}
-      #ticketImpresion{display:block !important}
       html, body{
+        width:80mm !important;
+        height:auto !important;
         margin:0 !important;
         padding:0 !important;
-        height:auto !important;
+        overflow:hidden !important;
       }
+      body > *:not(#ticketImpresion){display:none !important}
       #ticketImpresion{
-        width:72mm;
-        max-width:72mm;
+        display:block !important;
+        position:static !important;
+        width:80mm !important;
+        max-width:80mm !important;
+        height:auto !important;
         font-family:'Courier New',monospace;
         font-size:12px;
         line-height:1.4;
         color:#000;
         background:#fff;
-        padding:3mm 3mm 0 3mm;
-        margin:0;
-        display:block;
+        margin:0 !important;
+        padding:2mm !important;
+        box-sizing:border-box !important;
         overflow:hidden;
+        page-break-after:avoid !important;
+        page-break-inside:avoid !important;
       }
       #ticketImpresion > *:last-child{
         margin-bottom:0 !important;
@@ -469,10 +475,8 @@
       #ticketImpresion .tk-total{font-size:14px;font-weight:bold;text-align:center}
       #ticketImpresion .tk-total-amount{font-size:16px;font-weight:bold}
       @page{
-        size:80mm auto;
-        margin:0;
-        margin-top:0;
-        margin-bottom:0;
+        size:80mm auto !important;
+        margin:0mm !important;
       }
     }
   </style>
